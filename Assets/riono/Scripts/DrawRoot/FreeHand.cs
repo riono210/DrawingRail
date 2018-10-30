@@ -12,6 +12,7 @@ public class FreeHand : MonoBehaviour {
     //private List<GameObject> lineInst; // lineインスタンス
     private GameObject lineInst;
 
+     public GameObject CameraObj; // カメラオブジェクト
     public FieldRange fieldRange;  // rangeスクリプト
     private float[] xRange;
     private float[] zRange;
@@ -21,6 +22,10 @@ public class FreeHand : MonoBehaviour {
     private Vector3 startPoint;   // 開始位置
 
     void Start() {
+        if(CameraObj == null){
+            CameraObj = GameObject.Find("Main Camera");
+        }
+
         lineRendererList = new List<LineRenderer>();
         linePoints = new List<Vector3>();
         resetFlg = false;
@@ -42,8 +47,8 @@ public class FreeHand : MonoBehaviour {
         }
 
         if(Input.GetMouseButtonUp(0) && !resetFlg){
-            LineFin();
-            resetFlg = true;
+            // LineFin();
+            // resetFlg = true;
         }
 #elif UNITY_IOS
 
@@ -79,31 +84,31 @@ public class FreeHand : MonoBehaviour {
         lineRendererList.Last().endWidth = this.lineWidth;
 
 #if UNITY_EDITOR
-        // 一点目を記録
-        // 座標の変換を行いマウス位置を取得
-        //Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 1.0f);
-        Vector3 screenPosition = new Vector3(Input.mousePosition.x * 3, Input.mousePosition.y * 3, Camera.main.nearClipPlane + 1.0f);
-        var mousePosition = Camera.main.ScreenToWorldPoint(screenPosition);
+        // // 一点目を記録
+        // // 座標の変換を行いマウス位置を取得
+        // //Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 1.0f);
+        // Vector3 screenPosition = new Vector3(Input.mousePosition.x * 3, Input.mousePosition.y * 3, Camera.main.nearClipPlane + 1.0f);
+        // var mousePosition = Camera.main.ScreenToWorldPoint(screenPosition);
 
-        // 範囲制限
-        float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
-        float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
-        mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
-        Debug.Log("pos:" + mousePosition);
-        Debug.Log(transform.position.y);
+        // // 範囲制限
+        // float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
+        // float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
+        // mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
+        // Debug.Log("pos:" + mousePosition);
+        // Debug.Log(transform.position.y);
 
-        linePoints.Add(mousePosition);
+        // linePoints.Add(mousePosition);
 
-        // 線と線をつなぐ点の数を更新
-        lineRendererList.Last().positionCount += 1;
-        // Debug.Log("count:" + lineRendererList.Last().positionCount);
+        // // 線と線をつなぐ点の数を更新
+        // lineRendererList.Last().positionCount += 1;
+        // // Debug.Log("count:" + lineRendererList.Last().positionCount);
 
-        // 描く線のコンポーネントリストを更新
-        lineRendererList.Last().SetPosition(lineRendererList.Last().positionCount - 1, mousePosition);
+        // // 描く線のコンポーネントリストを更新
+        // lineRendererList.Last().SetPosition(lineRendererList.Last().positionCount - 1, mousePosition);
 
-        // オブジェクトを保持
-        //lineInst.Add(lineObject);
-        lineInst = lineObject;
+        // // オブジェクトを保持
+        // //lineInst.Add(lineObject);
+        // lineInst = lineObject;
 #endif
     }
 
@@ -112,31 +117,36 @@ public class FreeHand : MonoBehaviour {
     /// </summary>
     private void AddPositionDataToLineRendererList() {
         // 座標の変換を行いマウス位置を取得
-        Vector3 screenPosition = new Vector3(Input.mousePosition.x * 3, Input.mousePosition.y *3, Camera.main.nearClipPlane + 1.0f);
+        // filedとカメラとの距離の差
+        float diff = Mathf.Abs(CameraObj.transform.position.y - transform.position.y);
+        // 軸はx,y平面　高さがz軸
+        Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, diff);
         var mousePosition = Camera.main.ScreenToWorldPoint(screenPosition);
 
         // 範囲制限
         float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
         float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
-        mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
+        mousePosition = new Vector3(xNewPos, transform.position.y + 0.01f, zNewPos);
+        Debug.Log("moushPos " + mousePosition);
+
 
         int count = lineRendererList.Last().positionCount;
-        float dist = Vector3.Distance(mousePosition, lineRendererList.Last().GetPosition(Mathf.Max(0, count - 1))) * 100;
-        //Debug.Log("dist " + mousePosition);
+        // 頂点数の制限
+        //float dist = Vector3.Distance(mousePosition, lineRendererList.Last().GetPosition(Mathf.Max(0, count - 1))) * 100;
         //Debug.Log("getpos " + lineRendererList.Last().GetPosition(count-1));
         //Debug.Log("dist " + dist);
 
-        if (dist > 10f) {
+        //if (dist > 8f) {
             //Debug.Log("pos;" + mousePosition);
             linePoints.Add(mousePosition);
 
             // 線と線をつなぐ点の数を更新
             lineRendererList.Last().positionCount += 1;
-            Debug.Log("pos:" + mousePosition);
+            //Debug.Log("pos:" + mousePosition);
 
             // 描く線のコンポーネントリストを更新
             lineRendererList.Last().SetPosition(lineRendererList.Last().positionCount - 1, mousePosition);
-        }
+       // }
     }
 
     // 始点と終点をつなげる
@@ -169,7 +179,7 @@ public class FreeHand : MonoBehaviour {
     /// <summary>
     /// スマホの場合
     /// </summary>
-    public void AddPositonWithIOS (){
+    public void AddPositonWithIOS(){
         if (Input.touchCount > 0) {
 
             Touch touch = Input.GetTouch(0);
@@ -178,25 +188,38 @@ public class FreeHand : MonoBehaviour {
 
                 AddLineObject();
                 // 初回位置
-                startPoint = new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane + 1.0f);
-                var mousePosition = Camera.main.ScreenToWorldPoint(startPoint);
+                // startPoint = new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane + 1.0f);
+                // var mousePosition = Camera.main.ScreenToWorldPoint(startPoint);
 
                 // 範囲制限
-                float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
-                float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
-                mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
-                linePoints.Add(mousePosition);
+                // float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
+                // float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
+                // mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
+                // linePoints.Add(mousePosition);
             }
 
            if (touch.phase == TouchPhase.Moved) {
                 // todo: ここの変換部分を改良するとうまく固定するかも
-                Vector3 screenPosition = new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane + 1.0f);
+                // Vector3 screenPosition = new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane + 1.0f);
+                // var mousePosition = Camera.main.ScreenToWorldPoint(screenPosition);
+
+                // // 範囲制限
+                // float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
+                // float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
+                // mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
+
+                // 座標の変換を行いマウス位置を取得
+                // filedとカメラとの距離の差
+                float diff = Mathf.Abs(CameraObj.transform.position.y - transform.position.y);
+                // 軸はx,y平面　高さがz軸
+                Vector3 screenPosition = new Vector3(touch.position.x, touch.position.y, diff);
                 var mousePosition = Camera.main.ScreenToWorldPoint(screenPosition);
 
                 // 範囲制限
                 float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
                 float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
-                mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
+                mousePosition = new Vector3(xNewPos, transform.position.y + 0.01f, zNewPos);
+
 
                 linePoints.Add(mousePosition);
                 // 線と線をつなぐ点の数を更新
@@ -208,12 +231,12 @@ public class FreeHand : MonoBehaviour {
 
             // 始点と終点をつなげる
             if(touch.phase == TouchPhase.Ended){
-                // 線と線をつなぐ点の数を更新
-                lineRendererList.Last().positionCount += 1;
+                // // 線と線をつなぐ点の数を更新
+                // lineRendererList.Last().positionCount += 1;
 
 
-                // 描く線のコンポーネントリストを更新
-                lineRendererList.Last().SetPosition(lineRendererList.Last().positionCount - 1, startPoint);
+                // // 描く線のコンポーネントリストを更新
+                // lineRendererList.Last().SetPosition(lineRendererList.Last().positionCount - 1, startPoint);
             }
         }
     }

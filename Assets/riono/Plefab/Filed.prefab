@@ -111,7 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineMaterial: {fileID: 2100000, guid: f96626259382e42e2a8bf2e139886217, type: 2}
   lineColor: {r: 0, g: 0, b: 0, a: 0}
-  lineWidth: 0.05
+  lineWidth: 0.01
+  CameraObj: {fileID: 0}
   fieldRange: {fileID: 114720668984282712}
   resetFlg: 0
 --- !u!114 &114720668984282712
