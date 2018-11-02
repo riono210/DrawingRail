@@ -14,7 +14,12 @@ ARmStrong
 「自由に線路や乗り物を描き，走らせる」ことができます。
 
 ## GitHub
+unity班
 https://github.com/riono210/DrawingRail
 
+画像処理班
+https://github.com/e165752/Plarail_opencv
+
 ## Trello
-https://trello.com/b/K7vcl8Gy/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%83%AC%E3%83%BC%E3%83%AB
+https://trello.com/b/K7vcl8Gy
+
