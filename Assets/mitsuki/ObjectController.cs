@@ -17,6 +17,15 @@ public class ObjectController : MonoBehaviour
         m_navAgent = this.GetComponent<NavMeshAgent>();
     }
 
+    public void GoButtonDown()
+    {
+        m_navAgent.speed += 0.5f;
+    }
+    public void StopButtonDown()
+    {
+        m_navAgent.speed -= 0.8f;
+    }
+
     private void Start()
     {
         currnetTartget = 0;
@@ -39,6 +48,7 @@ public class ObjectController : MonoBehaviour
         }
 
         m_navAgent.destination = m_target[currnetTartget].position;
+
 
     } // class ObjectController
 }
