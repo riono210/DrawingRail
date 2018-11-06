@@ -88,34 +88,6 @@ public class FreeHand : MonoBehaviour {
         // 線の太さを初期化
         lineRenderer.startWidth = this.lineWidth;
         lineRenderer.endWidth = this.lineWidth;
-
-#if UNITY_EDITOR
-        // // 一点目を記録
-        // // 座標の変換を行いマウス位置を取得
-        // //Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 1.0f);
-        // Vector3 screenPosition = new Vector3(Input.mousePosition.x * 3, Input.mousePosition.y * 3, Camera.main.nearClipPlane + 1.0f);
-        // var mousePosition = Camera.main.ScreenToWorldPoint(screenPosition);
-
-        // // 範囲制限
-        // float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
-        // float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
-        // mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
-        // Debug.Log("pos:" + mousePosition);
-        // Debug.Log(transform.position.y);
-
-        // linePoints.Add(mousePosition);
-
-        // // 線と線をつなぐ点の数を更新
-        // lineRendererList.Last().positionCount += 1;
-        // // Debug.Log("count:" + lineRendererList.Last().positionCount);
-
-        // // 描く線のコンポーネントリストを更新
-        // lineRendererList.Last().SetPosition(lineRendererList.Last().positionCount - 1, mousePosition);
-
-        // // オブジェクトを保持
-        // //lineInst.Add(lineObject);
-        // lineInst = lineObject;
-#endif
     }
 
     /// <summary>
@@ -133,26 +105,34 @@ public class FreeHand : MonoBehaviour {
         float xNewPos = Mathf.Clamp (mousePosition.x, xRange[0], xRange[1]);
         float zNewPos = Mathf.Clamp (mousePosition.z, zRange[0], zRange[1]);
         mousePosition = new Vector3 (xNewPos, transform.position.y + 0.01f, zNewPos);
+
+        // 差異を記録
+        RailCreateManager.Instance.positionDiff = this.transform.position;
         //Debug.Log ("moushPos " + mousePosition);
 
-        //int count = lineRendererList.Last ().positionCount;
+        int count = lineRenderer.positionCount;
+
+        // 頂点数の制限比較
+        Vector3 old;
+        if (count - 1 < 0) {
+            old = Vector3.zero;
+        } else {
+            old = lineRenderer.GetPosition (count - 1);
+        }
+        float dist = Vector3.Distance (mousePosition, old) * 100;
 
         // 頂点数の制限
-        //float dist = Vector3.Distance(mousePosition, lineRendererList.Last().GetPosition(Mathf.Max(0, count - 1))) * 100;
-        //Debug.Log("getpos " + lineRendererList.Last().GetPosition(count-1));
-        //Debug.Log("dist " + dist);
+        if (dist > 5f) {
+            //Debug.Log("pos;" + mousePosition);
+            linePoints.Add (mousePosition);
 
-        //if (dist > 8f) {
-        //Debug.Log("pos;" + mousePosition);
-        linePoints.Add (mousePosition);
+            // 線と線をつなぐ点の数を更新
+            lineRenderer.positionCount += 1;
+            //Debug.Log("pos:" + mousePosition);
 
-        // 線と線をつなぐ点の数を更新
-        lineRenderer.positionCount += 1;
-        //Debug.Log("pos:" + mousePosition);
-
-        // 描く線のコンポーネントリストを更新
-        lineRenderer.SetPosition (lineRenderer.positionCount - 1, mousePosition);
-        // }
+            // 描く線のコンポーネントリストを更新
+            lineRenderer.SetPosition (lineRenderer.positionCount - 1, mousePosition);
+        }
     }
 
     // 始点と終点をつなげる
@@ -181,7 +161,7 @@ public class FreeHand : MonoBehaviour {
     // 頂点配列を受け渡す
     public void CreateRail () {
         RailCreateManager.Instance.linePoints = linePoints;
-        SceneManager.LoadScene ("CreateRailScene");
+        SceneManager.LoadScene (1);
     }
 
     public List<Vector3> GetPosList () {
@@ -196,7 +176,7 @@ public class FreeHand : MonoBehaviour {
 
             Touch touch = Input.GetTouch (0);
 
-            if (touch.phase == TouchPhase.Began) {
+            if (touch.phase == TouchPhase.Began && !resetFlg) {
 
                 AddLineObject ();
                 // 初回位置
@@ -210,7 +190,7 @@ public class FreeHand : MonoBehaviour {
                 // linePoints.Add(mousePosition);
             }
 
-            if (touch.phase == TouchPhase.Moved) {
+            if (touch.phase == TouchPhase.Moved && !resetFlg) {
                 // todo: ここの変換部分を改良するとうまく固定するかも
                 // Vector3 screenPosition = new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane + 1.0f);
                 // var mousePosition = Camera.main.ScreenToWorldPoint(screenPosition);
@@ -232,6 +212,9 @@ public class FreeHand : MonoBehaviour {
                 float zNewPos = Mathf.Clamp (mousePosition.z, zRange[0], zRange[1]);
                 mousePosition = new Vector3 (xNewPos, transform.position.y + 0.01f, zNewPos);
 
+                // 差異を記録
+                RailCreateManager.Instance.positionDiff = this.transform.position;
+
                 linePoints.Add (mousePosition);
 
                 // 線と線をつなぐ点の数を更新
@@ -240,14 +223,9 @@ public class FreeHand : MonoBehaviour {
                 // 描く線のコンポーネントリストを更新
                 lineRenderer.SetPosition (lineRenderer.positionCount - 1, mousePosition);
             }
-
-            // 始点と終点をつなげる
-            if (touch.phase == TouchPhase.Ended) {
-                // // 線と線をつなぐ点の数を更新
-                // lineRendererList.Last().positionCount += 1;
-
-                // // 描く線のコンポーネントリストを更新
-                // lineRendererList.Last().SetPosition(lineRendererList.Last().positionCount - 1, startPoint);
+            
+            if (touch.phase == TouchPhase.Ended && !resetFlg && !clickFlg) {
+                resetFlg = true;
             }
         }
     }

@@ -33,10 +33,6 @@ public class CreateRale : MonoBehaviour {
     // 前のシーンで描いたLineRendererを取得
     public void makeRoot () {
         linePoints = RailCreateManager.Instance.linePoints;
-
-        // foreach (var value in linePoints) {
-        //     Debug.Log (value);
-        // }
     }
 
     // 仮の台オブジェクトの子供にLineRendererを設定
@@ -44,6 +40,12 @@ public class CreateRale : MonoBehaviour {
         // 追加するオブジェクトをインスタンス
         lineObject = new GameObject ();
         lineObject.transform.parent = filedObj.transform;
+#if UNITY_EDITOR
+        lineObject.transform.localPosition = new Vector3 (0, 1, 0);
+#else
+        lineObject.transform.localPosition = new Vector3 (0, 1.5f, 0);
+#endif
+        lineObject.transform.localScale = new Vector3 (0.5f, 3, 0.5f);
 
         // オブジェクトにLineRendererを取り付ける
         lineObject.AddComponent<LineRenderer> ();
@@ -68,17 +70,15 @@ public class CreateRale : MonoBehaviour {
     // 取得したLineRrendererから線を描画
     public void AddNewPoints () {
         int count = 0;
-        float xDiffRange = 0;
-        float zDiffRange = 0;
         foreach (var value in linePoints) {
             Vector3 newPos = value;
 
-            // 初期値を保存して位置調整
-            if (count == 0) {
-                xDiffRange = newPos.x;
-                zDiffRange = newPos.z;
-            }
-            newPos = new Vector3 (newPos.x - xDiffRange, newPos.y, newPos.z - zDiffRange);
+            // 位置調整
+            Vector3 diff = RailCreateManager.Instance.positionDiff;
+
+            //newPos = new Vector3 (newPos.x - xDiffRange, newPos.y + 0.05f, newPos.z - zDiffRange);
+            newPos = new Vector3 (newPos.x - diff.x, newPos.y + 0.05f, newPos.z - diff.z);
+            Debug.Log ("x:" + diff.x + " z:" + diff.z);
 
             // 線と線をつなぐ点の数を更新
             railRender.positionCount += 1;
@@ -118,28 +118,35 @@ public class CreateRale : MonoBehaviour {
             Transform currentChild = lineObject.transform.GetChild (i);
             Transform nextChild = lineObject.transform.GetChild ((i + 1) % totalCount);
 
-            // Debug.Log ("orig:" + currentChild.name + " next;" + nextChild.name);
+            // 角度の計算
             float xzAngle = BetweenAngleXZ (currentChild.position, nextChild.position);
-            //Vector3 position = HalfPoint (currentChild.position, nextChild.position);
-            Vector3 position = currentChild.position;
-            //Debug.Log ("i:" + currentChild.position + " ne" + nextChild.position);
+            // 二点間の中間位置を計算
+            Vector3 newPosition = HalfPoint (currentChild.position, nextChild.position);
+
             // インスタンス生成
             GameObject raileInstance = Instantiate (railPrefab,
-                position,
+                newPosition,
                 Quaternion.Euler (0, -xzAngle, 0),
                 lineObject.transform);
 
+            SetSize (currentChild.position, newPosition, raileInstance.transform);
             raileInstance.name = "rail_" + i;
         }
     }
 
     // 二点間の中心点
     private Vector3 HalfPoint (Vector3 origin, Vector3 next) {
-        float xPos = next.x - origin.x;
-        float yPos = next.y - origin.y;
-        float zPos = next.z - origin.z;
-        Debug.Log ("x:" + xPos + " y:" + yPos + " z:" + zPos);
+        float xPos = (next.x + origin.x) / 2;
+        float yPos = (next.y + origin.y) / 2;
+        float zPos = (next.z + origin.z) / 2;
         return new Vector3 (xPos, yPos, zPos);
+    }
+
+    // レールのサイズ調整
+    private void SetSize (Vector3 origin, Vector3 middle, Transform rail) {
+        float xSize = Vector3.Distance (origin, middle) * 3.8f;
+        Vector3 railSize = rail.transform.localScale;
+        rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
     }
 
     // 二点間の角度を求める

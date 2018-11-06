@@ -9,45 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1711903219034086}
+  m_RootGameObject: {fileID: 1547323620228808}
   m_IsPrefabAsset: 1
---- !u!1 &1711903219034086
+--- !u!1 &1547323620228808
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4291532153111384}
-  - component: {fileID: 33287341930313558}
-  - component: {fileID: 23809140821973206}
-  - component: {fileID: 65452935455183486}
+  - component: {fileID: 4758050585994918}
+  - component: {fileID: 33662426733683318}
+  - component: {fileID: 23191646504391768}
+  - component: {fileID: 65451633228772180}
+  - component: {fileID: 114720668984282712}
+  - component: {fileID: 114648901204699416}
   m_Layer: 0
-  m_Name: Rail
+  m_Name: DrawFiled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4291532153111384
+--- !u!4 &4758050585994918
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1711903219034086}
+  m_GameObject: {fileID: 1547323620228808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.025, y: 1.592, z: -0.0039}
-  m_LocalScale: {x: 0.1, y: 0.025656, z: 0.044622846}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.01, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23809140821973206
+--- !u!23 &23191646504391768
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1711903219034086}
+  m_GameObject: {fileID: 1547323620228808}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -57,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f16ae4699e7b94926b9adfbfe74e71f9, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,22 +79,51 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33287341930313558
+--- !u!33 &33662426733683318
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1711903219034086}
+  m_GameObject: {fileID: 1547323620228808}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65452935455183486
+--- !u!65 &65451633228772180
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1711903219034086}
+  m_GameObject: {fileID: 1547323620228808}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114648901204699416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1547323620228808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be59b3ef30cfc49e4979f9cdf5ffbca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineMaterial: {fileID: 2100000, guid: f96626259382e42e2a8bf2e139886217, type: 2}
+  lineColor: {r: 0, g: 0, b: 0, a: 0}
+  lineWidth: 0.01
+  CameraObj: {fileID: 0}
+  fieldRange: {fileID: 114720668984282712}
+  resetFlg: 0
+--- !u!114 &114720668984282712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1547323620228808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7c2bcf10ab44a019ec1a7c61c85395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drowPlane: {fileID: 1547323620228808}

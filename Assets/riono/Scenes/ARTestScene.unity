@@ -361,7 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planePrefab: {fileID: 1372998203143648, guid: f879aaf3eeb0c467eb22cbaf08dc97a4,
     type: 2}
-  fieldPrefab: {fileID: 1547323620228808, guid: 65bc0c4c7e87044709649bf575d93b35,
+  fieldPrefab: {fileID: 1896969720823680, guid: 5b20c924be96547988fb9db76c0f0f52,
     type: 2}
 --- !u!4 &2143811418
 Transform:

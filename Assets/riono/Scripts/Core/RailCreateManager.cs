@@ -8,6 +8,8 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	[HideInInspector] public List<Vector3> linePoints;
 	// 描いたレールのLineRenderer
 	[HideInInspector] public LineRenderer createRender;
+	// posの差異
+	[HideInInspector] public Vector3 positionDiff;
 
 	// 初期化
 	protected override void Awake () {
@@ -16,6 +18,7 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 
 		linePoints = new List<Vector3> ();
 		createRender = null;
+		positionDiff = Vector3.zero;
 	}
 
 	// Use this for initialization
