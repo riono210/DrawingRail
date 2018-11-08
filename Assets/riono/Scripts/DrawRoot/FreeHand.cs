@@ -94,11 +94,11 @@ public class FreeHand : MonoBehaviour {
     /// 描く線のコンポーネントリストに位置情報を登録していく
     /// </summary>
     private void AddPositionDataToLineRendererList () {
-        // 座標の変換を行いマウス位置を取得
         // filedとカメラとの距離の差
         float diff = Mathf.Abs (CameraObj.transform.position.y - transform.position.y);
         // 軸はx,y平面　高さがz軸
         Vector3 screenPosition = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, diff);
+        // 座標の変換を行いマウス位置を取得
         var mousePosition = Camera.main.ScreenToWorldPoint (screenPosition);
 
         // 範囲制限
@@ -135,15 +135,6 @@ public class FreeHand : MonoBehaviour {
         }
     }
 
-    // 始点と終点をつなげる
-    // private void LineFin () {
-    //     // 線と線をつなぐ点の数を更新
-    //     lineRendererList.Last ().positionCount += 1;
-
-    //     // 描く線のコンポーネントリストを更新
-    //     lineRendererList.Last ().SetPosition (lineRendererList.Last ().positionCount - 1, linePoints.First ());
-    // }
-
     /// <summary>
     /// 各リストのリセット
     /// </summary>
@@ -164,6 +155,7 @@ public class FreeHand : MonoBehaviour {
         SceneManager.LoadScene (1);
     }
 
+    // 頂点のリストを返す
     public List<Vector3> GetPosList () {
         return linePoints;
     }
@@ -179,32 +171,14 @@ public class FreeHand : MonoBehaviour {
             if (touch.phase == TouchPhase.Began && !resetFlg) {
 
                 AddLineObject ();
-                // 初回位置
-                // startPoint = new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane + 1.0f);
-                // var mousePosition = Camera.main.ScreenToWorldPoint(startPoint);
-
-                // 範囲制限
-                // float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
-                // float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
-                // mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
-                // linePoints.Add(mousePosition);
             }
 
             if (touch.phase == TouchPhase.Moved && !resetFlg) {
-                // todo: ここの変換部分を改良するとうまく固定するかも
-                // Vector3 screenPosition = new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane + 1.0f);
-                // var mousePosition = Camera.main.ScreenToWorldPoint(screenPosition);
-
-                // // 範囲制限
-                // float xNewPos = Mathf.Clamp(mousePosition.x, xRange[0], xRange[1]);
-                // float zNewPos = Mathf.Clamp(mousePosition.z, zRange[0], zRange[1]);
-                // mousePosition = new Vector3(xNewPos, transform.position.y + 0.3f, zNewPos);
-
-                // 座標の変換を行いマウス位置を取得
                 // filedとカメラとの距離の差
                 float diff = Mathf.Abs (CameraObj.transform.position.y - transform.position.y);
                 // 軸はx,y平面　高さがz軸
                 Vector3 screenPosition = new Vector3 (touch.position.x, touch.position.y, diff);
+                // 座標の変換を行いマウス位置を取得
                 var mousePosition = Camera.main.ScreenToWorldPoint (screenPosition);
 
                 // 範囲制限
@@ -223,7 +197,7 @@ public class FreeHand : MonoBehaviour {
                 // 描く線のコンポーネントリストを更新
                 lineRenderer.SetPosition (lineRenderer.positionCount - 1, mousePosition);
             }
-            
+
             if (touch.phase == TouchPhase.Ended && !resetFlg && !clickFlg) {
                 resetFlg = true;
             }

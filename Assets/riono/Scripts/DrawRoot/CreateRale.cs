@@ -76,7 +76,6 @@ public class CreateRale : MonoBehaviour {
             // 位置調整
             Vector3 diff = RailCreateManager.Instance.positionDiff;
 
-            //newPos = new Vector3 (newPos.x - xDiffRange, newPos.y + 0.05f, newPos.z - zDiffRange);
             newPos = new Vector3 (newPos.x - diff.x, newPos.y + 0.05f, newPos.z - diff.z);
             Debug.Log ("x:" + diff.x + " z:" + diff.z);
 

@@ -12,8 +12,6 @@ public class FieldRange : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        //Vector3 points;
-        //List<Vector2> dial = new List<Vector2> { { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 } };
         Vector3 planePos = drowPlane.transform.position;
 
         //planePoints.Add(planePos);
