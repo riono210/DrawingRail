@@ -67,14 +67,15 @@ public class FreeHand : MonoBehaviour {
         clickFlg = false;
 
         // 追加するオブジェクトをインスタンス
-        GameObject lineObject = new GameObject ();
-        lineObject.transform.parent = this.transform;
+        lineInst = new GameObject ();
+        lineInst.name = "LineObjct";
+        lineInst.transform.parent = this.transform;
 
         // オブジェクトにLineRendererを取り付ける
-        lineObject.AddComponent<LineRenderer> ();
+        lineInst.AddComponent<LineRenderer> ();
 
         // 描く線のコンポーネントリストに追加する
-        lineRenderer = lineObject.GetComponent<LineRenderer> ();
+        lineRenderer = lineInst.GetComponent<LineRenderer> ();
 
         // 線と線をつなぐ点の数を0に初期化
         lineRenderer.positionCount = 0;

@@ -39,13 +39,14 @@ public class CreateRale : MonoBehaviour {
     public void AddLineRenderer () {
         // 追加するオブジェクトをインスタンス
         lineObject = new GameObject ();
+        lineObject.name = "LineParent";
         lineObject.transform.parent = filedObj.transform;
 #if UNITY_EDITOR
         lineObject.transform.localPosition = new Vector3 (0, 1, 0);
 #else
         lineObject.transform.localPosition = new Vector3 (0, 1.5f, 0);
 #endif
-        lineObject.transform.localScale = new Vector3 (0.5f, 3, 0.5f);
+        //lineObject.transform.localScale = new Vector3 (0.5f, 3, 0.5f);
 
         // オブジェクトにLineRendererを取り付ける
         lineObject.AddComponent<LineRenderer> ();
@@ -77,7 +78,6 @@ public class CreateRale : MonoBehaviour {
             Vector3 diff = RailCreateManager.Instance.positionDiff;
 
             newPos = new Vector3 (newPos.x - diff.x, newPos.y + 0.05f, newPos.z - diff.z);
-            Debug.Log ("x:" + diff.x + " z:" + diff.z);
 
             // 線と線をつなぐ点の数を更新
             railRender.positionCount += 1;
@@ -96,7 +96,7 @@ public class CreateRale : MonoBehaviour {
 
     // 頂点とオブジェクトを紐付け
     private void CreatePointObj (int count, Vector3 position) {
-        // newObjectの名前と親,位置を設定
+        // 線の名前と親,位置を設定
         GameObject　 pointObj = new GameObject ();
         pointObj.name = "point_" + count;
         pointObj.transform.parent = lineObject.transform;
@@ -110,6 +110,10 @@ public class CreateRale : MonoBehaviour {
     // レールインスタンスを生成
     private void CreateRailInstance () {
         var childPoints = lineObject.transform.GetComponentInChildren<Transform> ();
+        // レールの親を生成
+        GameObject railParent = new GameObject ();
+        railParent.name = "RailParent";
+        railParent.transform.parent = filedObj.transform;
 
         for (int i = 0; i < totalCount; i++) {
             // float childIndex = childTransfrom.GetComponent<PointToObject> ().lineIndex;
@@ -126,7 +130,7 @@ public class CreateRale : MonoBehaviour {
             GameObject raileInstance = Instantiate (railPrefab,
                 newPosition,
                 Quaternion.Euler (0, -xzAngle, 0),
-                lineObject.transform);
+                railParent.transform);
 
             SetSize (currentChild.position, newPosition, raileInstance.transform);
             raileInstance.name = "rail_" + i;
@@ -141,9 +145,9 @@ public class CreateRale : MonoBehaviour {
         return new Vector3 (xPos, yPos, zPos);
     }
 
-    // レールのサイズ調整
+    // レールのサイズ(長さ)調整
     private void SetSize (Vector3 origin, Vector3 middle, Transform rail) {
-        float xSize = Vector3.Distance (origin, middle) * 3.8f;
+        float xSize = Vector3.Distance (origin, middle) * 1.8f;
         Vector3 railSize = rail.transform.localScale;
         rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
     }
