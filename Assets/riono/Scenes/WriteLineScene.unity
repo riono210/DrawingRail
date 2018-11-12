@@ -203,6 +203,7 @@ MonoBehaviour:
   CameraObj: {fileID: 0}
   fieldRange: {fileID: 0}
   resetFlg: 0
+  managerObj: {fileID: 0}
 --- !u!4 &220135556
 Transform:
   m_ObjectHideFlags: 0
@@ -462,6 +463,52 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 341583518}
   m_CullTransparentMesh: 0
+--- !u!1001 &431207093
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4812240281571962, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.096
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812240281571962, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812240281571962, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -7.703
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812240281571962, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812240281571962, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812240281571962, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812240281571962, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812240281571962, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1626201471115340, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &481532414
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +974,7 @@ Prefab:
     - target: {fileID: 114648901204699416, guid: 65bc0c4c7e87044709649bf575d93b35,
         type: 2}
       propertyPath: lineWidth
-      value: 0.01
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 114648901204699416, guid: 65bc0c4c7e87044709649bf575d93b35,
         type: 2}
@@ -950,6 +997,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 2.2943747
       objectReference: {fileID: 0}
+    - target: {fileID: 114648901204699416, guid: 65bc0c4c7e87044709649bf575d93b35,
+        type: 2}
+      propertyPath: managerObj
+      value: 
+      objectReference: {fileID: 2054845113}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65bc0c4c7e87044709649bf575d93b35, type: 2}
   m_IsPrefabAsset: 0
@@ -984,6 +1036,9 @@ MonoBehaviour:
   linePoints: []
   createRender: {fileID: 0}
   positionDiff: {x: 0, y: 0, z: 0}
+  railExistence: 0
+  rootExistence: 0
+  railNum: 0
 --- !u!4 &2054845115
 Transform:
   m_ObjectHideFlags: 0

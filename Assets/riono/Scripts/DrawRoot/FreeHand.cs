@@ -16,12 +16,14 @@ public class FreeHand : MonoBehaviour {
 
     public GameObject CameraObj; // カメラオブジェクト
     public FieldRange fieldRange; // rangeスクリプト
-    private float[] xRange;
+    private float[] xRange; // 線を弾ける範囲
     private float[] zRange;
 
     [HideInInspector] public bool resetFlg; // リセットフラグ
     private bool clickFlg; // ボタンクリックフラグ
     private Vector3 startPoint; // 開始位置
+
+    public GameObject managerObj; // ゲームマネージャー
 
     void Start () {
 
@@ -150,7 +152,7 @@ public class FreeHand : MonoBehaviour {
         }
     }
 
-    // 頂点配列を受け渡す
+    // 頂点配列を受け渡す,シーンの移動
     public void CreateRail () {
         RailCreateManager.Instance.linePoints = linePoints;
         SceneManager.LoadScene (1);

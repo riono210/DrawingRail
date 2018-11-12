@@ -10,6 +10,12 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	[HideInInspector] public LineRenderer createRender;
 	// posの差異
 	[HideInInspector] public Vector3 positionDiff;
+	// NavMeshを生成できるか
+	[HideInInspector] public bool railExistence;
+	// 電車の生成ができるか
+	[HideInInspector] public bool rootExistence;
+	// レールの数
+	[HideInInspector] public int railNum;
 
 	// 初期化
 	protected override void Awake () {
@@ -19,6 +25,9 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 		linePoints = new List<Vector3> ();
 		createRender = null;
 		positionDiff = Vector3.zero;
+		railExistence = false;
+		rootExistence = false;
+		railNum = 0;
 	}
 
 	// Use this for initialization

@@ -23,6 +23,7 @@ public class CreateRale : MonoBehaviour {
         AddLineRenderer ();
         AddNewPoints ();
         CreateRailInstance ();
+        RailCreateManager.Instance.railExistence = true;
     }
 
     // Update is called once per frame
@@ -92,6 +93,7 @@ public class CreateRale : MonoBehaviour {
         }
         totalCount = count;
         RailCreateManager.Instance.createRender = railRender;
+
     }
 
     // 頂点とオブジェクトを紐付け
@@ -114,12 +116,13 @@ public class CreateRale : MonoBehaviour {
         GameObject railParent = new GameObject ();
         railParent.name = "RailParent";
         railParent.transform.parent = filedObj.transform;
+        int railCount;
 
-        for (int i = 0; i < totalCount; i++) {
+        for (railCount = 0; railCount < totalCount; railCount++) {
             // float childIndex = childTransfrom.GetComponent<PointToObject> ().lineIndex;
 
-            Transform currentChild = lineObject.transform.GetChild (i);
-            Transform nextChild = lineObject.transform.GetChild ((i + 1) % totalCount);
+            Transform currentChild = lineObject.transform.GetChild (railCount);
+            Transform nextChild = lineObject.transform.GetChild ((railCount + 1) % totalCount);
 
             // 角度の計算
             float xzAngle = BetweenAngleXZ (currentChild.position, nextChild.position);
@@ -133,8 +136,10 @@ public class CreateRale : MonoBehaviour {
                 railParent.transform);
 
             SetSize (currentChild.position, newPosition, raileInstance.transform);
-            raileInstance.name = "rail_" + i;
+            raileInstance.name = "rail_" + railCount;
         }
+
+        RailCreateManager.Instance.railNum = railCount;
     }
 
     // 二点間の中心点
@@ -147,7 +152,7 @@ public class CreateRale : MonoBehaviour {
 
     // レールのサイズ(長さ)調整
     private void SetSize (Vector3 origin, Vector3 middle, Transform rail) {
-        float xSize = Vector3.Distance (origin, middle) * 1.8f;
+        float xSize = Vector3.Distance (origin, middle) * 1.2f;
         Vector3 railSize = rail.transform.localScale;
         rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
     }
