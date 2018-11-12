@@ -9,7 +9,8 @@ namespace Kakera
         private Unimgpicker imagePicker;
 
         [SerializeField]
-        private MeshRenderer imageRenderer;
+        //private MeshRenderer imageRenderer;
+        private SpriteRenderer imageRenderer;
 
         void Awake()
         {
@@ -24,19 +25,20 @@ namespace Kakera
             imagePicker.Show("Select Image", "unimgpicker", 1024);
         }
 
-        private IEnumerator LoadImage(string path, MeshRenderer output)
+        private IEnumerator LoadImage(string path, /*MeshRenderer*/ SpriteRenderer output)
         {
             var url = "file://" + path;
             var www = new WWW(url);
             yield return www;
 
             var texture = www.texture;
-            if (texture == null)
+            Sprite texture_sprite = Sprite.Create(texture, new Rect(0, 0, 1500, 1500), Vector2.zero);
+            if (texture_sprite == null)
             {
                 Debug.LogError("Failed to load texture url:" + url);
             }
 
-            output.material.mainTexture = texture;
+            output.sprite = texture_sprite;
         }
     }
 }

@@ -13,14 +13,16 @@ namespace Kakera
 
         public event ErrorDelegate Failed;
 
-        private IPicker picker = 
-        #if UNITY_IOS && !UNITY_EDITOR
+        private IPicker picker =
+#if UNITY_IOS && !UNITY_EDITOR
             new PickeriOS();
-        #elif UNITY_ANDROID && !UNITY_EDITOR
+#elif UNITY_ANDROID && !UNITY_EDITOR
             new PickerAndroid();
-        #else
+#elif UNITY_EDITOR_OSX || UNITY_EDITOR_WIN
+            new Picker_editor();
+#else
             new PickerUnsupported();
-        #endif
+#endif
 
         public void Show(string title, string outputFileName, int maxSize)
         {
