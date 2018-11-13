@@ -17,6 +17,8 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	// レールの数
 	[HideInInspector] public int railNum;
 
+	public bool ARFiledExist;
+
 	// 初期化
 	protected override void Awake () {
 		Debug.Log ("init!");
@@ -28,6 +30,7 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 		railExistence = false;
 		rootExistence = false;
 		railNum = 0;
+		ARFiledExist = false;
 	}
 
 	// Use this for initialization

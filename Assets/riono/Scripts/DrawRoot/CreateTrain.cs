@@ -12,20 +12,42 @@ public class CreateTrain : MonoBehaviour {
 
 	public NavMeshSurface NMSurface;
 	private int railNum;
+	private bool test;
 
 	private void Start () {
+#if UNITY_EDITOR
 		railObj = viewFiled.transform.Find ("RailParent").gameObject;
 		Debug.Log (railObj.name);
 		railNum = RailCreateManager.Instance.railNum;
-
+#endif
+		test = true;
 	}
 
 	private void Update () {
+#if UNITY_IOS
+		if (RailCreateManager.Instance.ARFiledExist) {
+			if (viewFiled == null) {
+				viewFiled = GameObject.Find ("ViewFiled");
+				Debug.Log ("ダメです");
+			}
+			railObj = viewFiled.transform.Find ("RailParent").gameObject;
+			Debug.Log (railObj.name);
+			railNum = RailCreateManager.Instance.railNum;
+			test = false;
+
+			MakeTrain ();
+
+			if (trainInst.GetComponent<TrainDeparture> () != null && trainInst.GetComponent<TrainDeparture> ().departure) {
+				StartCoroutine (StartDeparture ());
+			}
+		}
+#else
 		MakeTrain ();
 
 		if (trainInst.GetComponent<TrainDeparture> () != null && trainInst.GetComponent<TrainDeparture> ().departure) {
 			StartCoroutine (StartDeparture ());
 		}
+#endif
 	}
 
 	// 電車の生成
