@@ -24,7 +24,8 @@ public class CreateTrain : MonoBehaviour {
 	}
 
 	private void Update () {
-#if UNITY_IOS
+#if !UNITY_EDITOR
+		Debug.Log ("ios");
 		if (RailCreateManager.Instance.ARFiledExist) {
 			if (viewFiled == null) {
 				viewFiled = GameObject.Find ("ViewFiled");

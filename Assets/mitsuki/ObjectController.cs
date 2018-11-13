@@ -39,7 +39,7 @@ public class ObjectController : MonoBehaviour
     private void Update()
     {
         Vector3 pos = m_target[currnetTartget].position;
-        Debug.Log("dist; " + Vector3.Distance(this.transform.position, pos));
+        //Debug.Log("dist; " + Vector3.Distance(this.transform.position, pos));
 
         if (Vector3.Distance(this.transform.position, pos) < 0.065f)
         {
