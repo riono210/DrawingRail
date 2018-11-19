@@ -29,7 +29,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 				trainRb = train.GetComponent<Rigidbody> ();
 			}
 
-			RailCreateManager.Instance.trainExistence = false;
+			//RailCreateManager.Instance.trainExistence = false;
 			getTrain = true;
 		}
 	}
@@ -37,7 +37,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 	private void CheckTrainVector () {
 		if (getTrain) {
 			float speed = trainRb.velocity.magnitude;
-			Debug.Log ("spped" + speed);
+			//Debug.Log ("spped" + speed);
 		}
 	}
 }

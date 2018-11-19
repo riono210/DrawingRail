@@ -47,8 +47,6 @@ public class CreateTrain : MonoBehaviour {
 				StartCoroutine (StartDeparture ());
 			}
 
-			// TODO :実機確認
-			RailCreateManager.Instance.ARFiledExist = false;
 		}
 #endif
 	}

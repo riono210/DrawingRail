@@ -8,7 +8,22 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/LoadImage/Unimgpicker/Samples/Picker.unity
+  - enabled: 0
+    path: Assets/Unimgpicker/Samples/Picker3D.unity
     guid: 5e6bb1628afec4fabb31869b32c39149
+  - enabled: 1
+    path: Assets/riono/Scenes/WriteLineScene.unity
+    guid: 8120307cb16e34f9baf0ef0e6a96f0ec
+  - enabled: 0
+    path: Assets/riono/Scenes/CreateRailScene.unity
+    guid: b303c08c5fcee4f44a79f0fd029c1da2
+  - enabled: 1
+    path: Assets/riono/Scenes/ARTestScene.unity
+    guid: 269ed877cf6e54e4ea22e5e390c72911
+  - enabled: 0
+    path: Assets/unimgpicker-master/Unimgpicker/Samples/Picker.unity
+    guid: 29e857e2816d54ef3bc34f02a852ecb0
+  - enabled: 0
+    path: Assets/UnityARKitPlugin/ARKitRemote/UnityARKitRemote.unity
+    guid: 3ed73c0c9d4b76a418a0541c0cefd3ac
   m_configObjects: {}

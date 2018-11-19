@@ -19,11 +19,11 @@ public class ObjectController : MonoBehaviour
 
     public void GoButtonDown()
     {
-        m_navAgent.speed += 0.5f;
+        m_navAgent.speed += 0.05f;
     }
     public void StopButtonDown()
     {
-        m_navAgent.speed -= 0.8f;
+        m_navAgent.speed -= 0.05f;
     }
 
     private void Start()
