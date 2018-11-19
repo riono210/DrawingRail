@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 1223651444}
   - component: {fileID: 1223651443}
   - component: {fileID: 1223651446}
+  - component: {fileID: 1223651447}
   m_Layer: 0
   m_Name: TrainContoroller
   m_TagString: Untagged
@@ -391,7 +392,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trainObj: {fileID: 1626201471115340, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
   viewFiled: {fileID: 509355202}
-  NMSurface: {fileID: 0}
+--- !u!114 &1223651447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1223651442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2599761df6a9c4d3aa7d75c7c8569196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1373202979
 Prefab:
   m_ObjectHideFlags: 0

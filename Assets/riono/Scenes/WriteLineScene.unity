@@ -1086,6 +1086,8 @@ MonoBehaviour:
   rootExistence: 0
   railNum: 0
   ARFiledExist: 0
+  trainExistence: 0
+  manager: {fileID: 0}
 --- !u!4 &2054845115
 Transform:
   m_ObjectHideFlags: 0

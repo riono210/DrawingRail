@@ -99,7 +99,20 @@ public class CreateTrain : MonoBehaviour {
 
 		trainInst.GetComponent<ObjectController> ().enabled = true;
 		trainInst.SetActive (true);
+		// 電車が生成されたと通知
+		RailCreateManager.Instance.trainExistence = true;
 		// 誤反応防止のため削除
 		Destroy (trainInst.GetComponent<TrainDeparture> ());
+	}
+
+	// 生成したtrainを返す
+	public GameObject GetTrainInst () {
+		GameObject train;
+		if (trainInst != null) {
+			train = trainInst;
+		} else {
+			train = null;
+		}
+		return train;
 	}
 }

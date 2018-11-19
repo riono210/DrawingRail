@@ -18,6 +18,8 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	[HideInInspector] public int railNum;
 	// 実機上でViewFiledが生成されたか
 	[HideInInspector] public bool ARFiledExist;
+	// 電車が生成されたか
+	[HideInInspector] public bool trainExistence;
 	// manager staticなため取得可能
 	[HideInInspector] public GameObject manager;
 
@@ -33,6 +35,7 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 		rootExistence = false;
 		railNum = 0;
 		ARFiledExist = false;
+		trainExistence = false;
 		manager = this.gameObject;
 	}
 
