@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrainDeparture : MonoBehaviour {
 
+	// CreateTrainに影響
 	public bool departure;
 
 	// Use this for initialization
@@ -17,12 +18,6 @@ public class TrainDeparture : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter (Collision other) {
-
-		// if (departure) {
-		// 	StartCoroutine (StartDeparture ());
-		// 	Debug.Log ("touch");
-		// 	departure = false;
-		// }
 		departure = true;
 	}
 }

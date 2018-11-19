@@ -16,8 +16,10 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	[HideInInspector] public bool rootExistence;
 	// レールの数
 	[HideInInspector] public int railNum;
-
-	public bool ARFiledExist;
+	// 実機上でViewFiledが生成されたか
+	[HideInInspector] public bool ARFiledExist;
+	// manager staticなため取得可能
+	[HideInInspector] public GameObject manager;
 
 	// 初期化
 	protected override void Awake () {
@@ -31,6 +33,7 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 		rootExistence = false;
 		railNum = 0;
 		ARFiledExist = false;
+		manager = this.gameObject;
 	}
 
 	// Use this for initialization
