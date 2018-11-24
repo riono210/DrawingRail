@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrainDeparture : MonoBehaviour {
 
+	// 発車に関わる変数
 	// CreateTrainに影響
 	public bool departure;
 

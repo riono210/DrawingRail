@@ -41,7 +41,7 @@ public class FreeHand : MonoBehaviour {
 
     void Update () {
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR_OSX 
         // ボタンが押された時に線オブジェクトの追加を行う
         if (Input.GetMouseButtonDown (0) && !resetFlg) {
             this.AddLineObject ();
@@ -155,7 +155,11 @@ public class FreeHand : MonoBehaviour {
     // 頂点配列を受け渡す,シーンの移動
     public void CreateRail () {
         RailCreateManager.Instance.linePoints = linePoints;
-        SceneManager.LoadScene (1);
+#if UNITY_EDITOR_OSX 
+        SceneManager.LoadScene ("CreateRailScene");
+#elif UNITY_IOS 
+        SceneManager.LoadScene ("ARTestScene");
+#endif
     }
 
     // 頂点のリストを返す

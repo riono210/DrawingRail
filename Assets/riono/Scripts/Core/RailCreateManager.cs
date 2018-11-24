@@ -22,6 +22,8 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	[HideInInspector] public bool trainExistence;
 	// manager staticなため取得可能
 	[HideInInspector] public GameObject manager;
+	// 電車が脱線したか　
+	[HideInInspector] public bool isDerail;
 
 	// 初期化
 	protected override void Awake () {
@@ -37,6 +39,7 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 		ARFiledExist = false;
 		trainExistence = false;
 		manager = this.gameObject;
+		isDerail = false;
 	}
 
 	// Use this for initialization
