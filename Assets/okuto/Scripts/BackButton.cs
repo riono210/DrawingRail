@@ -4,23 +4,28 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BackButton : MonoBehaviour {
-
+	public AudioSource audioSource;
 	public void ButtonClicked(){
-		string SceneName =	SceneManager.GetActiveScene().name;
+		audioSource.Play();
+		float SoundTime = 0.1f;
+	    //DelayMethodを3.5秒後に呼び出す
+    	Invoke("MoveScene", SoundTime);
+	}
 
+
+	void MoveScene(){
+		string SceneName =	SceneManager.GetActiveScene().name;
+		// CreateRailScene -> WriteLineScene -> Picker -> TitleScene
 		switch(SceneName){
-			case "WriteLineScene":
-				SceneManager.LoadScene("TitleScene");
-				break;
-	
-			case "LoadPictureScene":
+			case "CreateRailScene":
 				SceneManager.LoadScene("WriteLineScene");
 				break;
-
-			case "CreateRailScene":
-				SceneManager.LoadScene("LoadPictureScene");
+			case "WriteLineScene": 
+				SceneManager.LoadScene("Picker");
+				break;	
+			case "Picker":
+				SceneManager.LoadScene("TitleScene");
 				break;
-
 			default:
 				Debug.Log(SceneManager.GetActiveScene().name + "がコードに書かれてません。");
 				break;
@@ -29,7 +34,7 @@ public class BackButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		audioSource = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame

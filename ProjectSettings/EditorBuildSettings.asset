@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ARTestScene.unity
     guid: 269ed877cf6e54e4ea22e5e390c72911
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Picker.unity
     guid: 29e857e2816d54ef3bc34f02a852ecb0
   - enabled: 0

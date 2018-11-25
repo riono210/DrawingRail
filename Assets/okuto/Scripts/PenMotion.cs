@@ -13,10 +13,11 @@ public class PenMotion : MonoBehaviour {
 	void Start () {
 		pen.SetActive(true);
 		isDisplay = true;
-		speed = 1.1f;
-		radius = 150f;
-		centerX = 350f;
-		centerY = 450f;
+		speed = 1.5f;
+		radius = (float)(Screen.height/5);
+		centerX = (float)(Screen.width/2);
+		centerY = (float)( (Screen.height/5)*3 );
+		Debug.Log(centerY);
 	}
 	
 	// Update is called once per frame
