@@ -3,8 +3,7 @@ using UnityEngine.AI;
 
 public class BuildNavmesh : MonoBehaviour {
 
-	private void Start () {
-	}
+	private void Start () { }
 
 	void Update () {
 		CreateNavMesh ();
@@ -14,9 +13,10 @@ public class BuildNavmesh : MonoBehaviour {
 	public void CreateNavMesh () {
 		if (RailCreateManager.Instance.railExistence) {
 			GetComponent<NavMeshSurface> ().BuildNavMesh ();
-			
+
 			RailCreateManager.Instance.railExistence = false;
-			RailCreateManager.Instance.rootExistence = true;
+			//RailCreateManager.Instance.rootExistence = true;
+			RailCreateManager.Instance.shapeRail = true;
 		}
 	}
 }

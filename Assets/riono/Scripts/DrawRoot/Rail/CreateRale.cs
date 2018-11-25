@@ -16,6 +16,7 @@ public class CreateRale : MonoBehaviour {
 
     private int totalCount; // 頂点の数
     public GameObject railPrefab; // レールプレファブ
+    [HideInInspector] public GameObject railParent;
 
     // Use this for initialization
     void Start () {
@@ -28,7 +29,9 @@ public class CreateRale : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
+        if (RailCreateManager.Instance.shapeRail) {
+            AdjustRail ();
+        }
     }
 
     // 前のシーンで描いたLineRendererを取得
@@ -113,7 +116,7 @@ public class CreateRale : MonoBehaviour {
     private void CreateRailInstance () {
         var childPoints = lineObject.transform.GetComponentInChildren<Transform> ();
         // レールの親を生成
-        GameObject railParent = new GameObject ();
+        railParent = new GameObject ();
         railParent.name = "RailParent";
         railParent.transform.parent = filedObj.transform;
         int railCount;
@@ -184,4 +187,21 @@ public class CreateRale : MonoBehaviour {
         float rad = Mathf.Atan2 (dz, dx);
         return rad * Mathf.Rad2Deg;
     }
+
+    private void AdjustRail () {
+
+        var railChiled = railParent.transform.GetComponentsInChildren<Transform> ();
+        foreach (var value in railChiled) {
+            // 0番目にrailObj自体が入ってしまうのでコライダーの有無で判断
+            if (value.GetComponent<BoxCollider> ()) {
+                Vector3 chiledScale = value.transform.localScale;
+                value.transform.localScale =
+                    new Vector3 (chiledScale.x, chiledScale.y, 0.08f);
+                // Debug.Log (value);
+            }
+        }
+        RailCreateManager.Instance.shapeRail = false;
+        RailCreateManager.Instance.rootExistence = true;
+    }
+
 }

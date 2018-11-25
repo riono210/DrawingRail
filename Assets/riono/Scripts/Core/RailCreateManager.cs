@@ -10,19 +10,22 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	[HideInInspector] public LineRenderer createRender;
 	// posの差異
 	[HideInInspector] public Vector3 positionDiff;
-	// NavMeshを生成できるか
-	[HideInInspector] public bool railExistence;
-	// 電車の生成ができるか
-	[HideInInspector] public bool rootExistence;
 	// レールの数
 	[HideInInspector] public int railNum;
-	// 実機上でViewFiledが生成されたか
-	[HideInInspector] public bool ARFiledExist;
-	// 電車が生成されたか
-	[HideInInspector] public bool trainExistence;
 	// manager staticなため取得可能
 	[HideInInspector] public GameObject manager;
-	// 電車が脱線したか　
+
+	// 実機上でViewFiledが生成されたか  0
+	[HideInInspector] public bool ARFiledExist;
+	// NavMeshを生成できるか  1
+	[HideInInspector] public bool railExistence;
+	// レールが調整されたか　　2
+	[HideInInspector] public bool shapeRail;
+	// 電車の生成ができるか  3
+	[HideInInspector] public bool rootExistence;
+	// 電車が生成されたか  4
+	[HideInInspector] public bool trainExistence;
+	// 電車が脱線したか　  5
 	[HideInInspector] public bool isDerail;
 
 	// 初期化
@@ -33,12 +36,14 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 		linePoints = new List<Vector3> ();
 		createRender = null;
 		positionDiff = Vector3.zero;
-		railExistence = false;
-		rootExistence = false;
 		railNum = 0;
-		ARFiledExist = false;
-		trainExistence = false;
 		manager = this.gameObject;
+
+		ARFiledExist = false;
+		railExistence = false;
+		shapeRail = false;
+		rootExistence = false;
+		trainExistence = false;
 		isDerail = false;
 	}
 

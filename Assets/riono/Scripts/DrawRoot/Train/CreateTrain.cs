@@ -25,9 +25,21 @@ public class CreateTrain : MonoBehaviour {
 #if UNITY_EDITOR_OSX  // editor
 		MakeTrain ();
 
-		if (trainInst.GetComponent<TrainDeparture> () != null && trainInst.GetComponent<TrainDeparture> ().departure) {
-			StartCoroutine (StartDeparture ());
+		if (!RailCreateManager.Instance.trainExistence) {
+			try {
+				trainInst.GetComponent<TrainDeparture> ();
+				if (trainInst.GetComponent<TrainDeparture> ().departure) {
+					StartCoroutine (StartDeparture ());
+				}
+			} catch (System.NullReferenceException) {
+				//Debug.Log ("error");
+			}
 		}
+		// if (trainInst.GetComponent<TrainDeparture> () != null && trainInst.GetComponent<TrainDeparture> ().departure) {
+		// 	StartCoroutine (StartDeparture ());
+		// } else {
+		// 	Debug.Log ("error");
+		// }
 
 #elif UNITY_IOS    // 実機
 		Debug.Log ("ios");
