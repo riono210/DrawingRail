@@ -135,7 +135,7 @@ public class CreateRale : MonoBehaviour {
                 Quaternion.Euler (0, -xzAngle, 0),
                 railParent.transform);
 
-            SetSize (currentChild.position, newPosition, raileInstance.transform);
+            SetSize (currentChild.position, nextChild.position, raileInstance.transform);
             raileInstance.name = "rail_" + railCount;
         }
 
@@ -151,10 +151,29 @@ public class CreateRale : MonoBehaviour {
     }
 
     // レールのサイズ(長さ)調整
-    private void SetSize (Vector3 origin, Vector3 middle, Transform rail) {
-        float xSize = Vector3.Distance (origin, middle) * 1.2f;
+    private void SetSize (Vector3 origin, Vector3 next, Transform rail) {
+
+        float diff = Vector3.Distance (origin, next);
         Vector3 railSize = rail.transform.localScale;
-        rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
+        Debug.Log ("diff:" + diff + " rail:" + railSize.x);
+
+        // 二点間の距離がレールの元サイズよりも大きいとき
+        if (diff >= railSize.x) {
+            // 調整値を計算
+            float xSize = (diff - railSize.x);
+            // NavMeshができるよう調整
+            xSize *= 1.3f;
+
+            rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
+
+        } else if (diff < railSize.x) { // 二点間の距離がレールの元サイズよりも小さい時
+            // 調整値を計算
+            float xSize = (railSize.x - diff);
+            // NavMeshができるよう調整
+            xSize *= 0.7f;
+
+            rail.transform.localScale = new Vector3 (railSize.x - xSize, railSize.y, railSize.z);
+        }
     }
 
     // 二点間の角度を求める

@@ -109,7 +109,7 @@ public class FreeHand : MonoBehaviour {
         float zNewPos = Mathf.Clamp (mousePosition.z, zRange[0], zRange[1]);
         mousePosition = new Vector3 (xNewPos, transform.position.y + 0.01f, zNewPos);
 
-        // 差異を記録
+        // 差異(レール全体の位置)を記録
         RailCreateManager.Instance.positionDiff = this.transform.position;
         //Debug.Log ("moushPos " + mousePosition);
 
