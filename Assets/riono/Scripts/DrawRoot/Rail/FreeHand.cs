@@ -19,8 +19,8 @@ public class FreeHand : MonoBehaviour {
     private float[] xRange; // 線を弾ける範囲
     private float[] zRange;
 
-    [HideInInspector] public bool resetFlg; // リセットフラグ
-    private bool clickFlg; // ボタンクリックフラグ
+    public bool resetFlg; // リセットフラグ
+    [SerializeField] private bool clickFlg; // ボタンクリックフラグ
     private Vector3 startPoint; // 開始位置
 
     public GameObject managerObj; // ゲームマネージャー
@@ -142,7 +142,7 @@ public class FreeHand : MonoBehaviour {
     /// 各リストのリセット
     /// </summary>
     public void Reset () {
-        if (lineRenderer != null && resetFlg) {
+        if (lineRenderer != null) {
             lineRenderer.positionCount = 0;
             linePoints.Clear ();
             resetFlg = false;
@@ -154,12 +154,19 @@ public class FreeHand : MonoBehaviour {
 
     // 頂点配列を受け渡す,シーンの移動
     public void CreateRail () {
-        RailCreateManager.Instance.linePoints = linePoints;
+        //resetFlg = false;
+
+        // 線を書いていない時には押せない
+        if (linePoints.Count () >= 5) {
+            RailCreateManager.Instance.linePoints = linePoints;
 #if UNITY_EDITOR_OSX 
-        SceneManager.LoadScene ("CreateRailScene");
+            SceneManager.LoadScene ("CreateRailScene");
 #elif UNITY_IOS 
-        SceneManager.LoadScene ("ARTestScene");
+            SceneManager.LoadScene ("ARTestScene");
 #endif
+        } else {
+            Reset ();
+        }
     }
 
     // 頂点のリストを返す
