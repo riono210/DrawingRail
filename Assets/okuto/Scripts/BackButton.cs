@@ -15,9 +15,12 @@ public class BackButton : MonoBehaviour {
 
 	void MoveScene(){
 		string SceneName =	SceneManager.GetActiveScene().name;
-		// CreateRailScene -> WriteLineScene -> Picker -> TitleScene
+		// ARTestScene(CreateRailScene) -> WriteLineScene -> Picker -> TitleScene
 		switch(SceneName){
 			case "CreateRailScene":
+				SceneManager.LoadScene("WriteLineScene");
+				break;
+			case "ARTestScene":
 				SceneManager.LoadScene("WriteLineScene");
 				break;
 			case "WriteLineScene": 
