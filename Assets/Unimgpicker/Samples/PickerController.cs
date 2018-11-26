@@ -32,7 +32,7 @@ namespace Kakera
             yield return www;
 
             var texture = www.texture;
-            Sprite texture_sprite = Sprite.Create(texture, new Rect(0, 0, 3024, 4032), Vector2.zero);
+            Sprite texture_sprite = Sprite.Create(texture, new Rect(0, 0, 500, 500), Vector2.zero);
             if (texture_sprite == null)
             {
                 Debug.LogError("Failed to load texture url:" + url);
