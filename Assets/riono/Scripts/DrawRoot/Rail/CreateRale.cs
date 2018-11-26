@@ -48,7 +48,7 @@ public class CreateRale : MonoBehaviour {
 #if UNITY_EDITOR
         lineObject.transform.localPosition = new Vector3 (0, 1, 0);
 #else
-        lineObject.transform.localPosition = new Vector3 (0, 1.5f, 0);
+        lineObject.transform.localPosition = new Vector3 (0, 1f, 0);
 #endif
         //lineObject.transform.localScale = new Vector3 (0.5f, 3, 0.5f);
 
@@ -158,7 +158,7 @@ public class CreateRale : MonoBehaviour {
 
         float diff = Vector3.Distance (origin, next);
         Vector3 railSize = rail.transform.localScale;
-        Debug.Log ("diff:" + diff + " rail:" + railSize.x);
+        //Debug.Log ("diff:" + diff + " rail:" + railSize.x);
 
         // 二点間の距離がレールの元サイズよりも大きいとき
         if (diff >= railSize.x) {

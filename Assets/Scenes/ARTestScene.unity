@@ -401,7 +401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &406662338
 RectTransform:
   m_ObjectHideFlags: 0
@@ -599,6 +599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trainObj: {fileID: 1626201471115340, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
   viewFiled: {fileID: 0}
+  trainDeparture: 0
 --- !u!114 &597987138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dangerImg: {fileID: 406662337}
   speedBtnCtl: {fileID: 597987141}
+  createTrain: {fileID: 597987137}
 --- !u!1 &676078922
 GameObject:
   m_ObjectHideFlags: 0

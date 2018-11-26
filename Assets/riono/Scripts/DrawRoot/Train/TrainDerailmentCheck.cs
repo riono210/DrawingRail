@@ -20,6 +20,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 	private float derailSpeed; // 脱線する速度
 	private bool isDerail; // 脱線フラグ
 	public GetObjectController speedBtnCtl; // 速度調節ボタンのイベント設定クラス
+	public CreateTrain createTrain; // 電車生成クラス
 
 	// Use this for initialization
 	void Start () {
@@ -84,7 +85,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 
 	// 危険マークを点滅させる
 	private IEnumerator SpeedDanger () {
-		Debug.Log ("call");
+		//Debug.Log ("call");
 		while (true) {
 			dangerImg.SetActive (true);
 
@@ -129,10 +130,9 @@ public class TrainDerailmentCheck : MonoBehaviour {
 		Destroy (train);
 		Destroy (trainChiled);
 		RailCreateManager.Instance.rootExistence = true; // 電車生成に関するフラグ
-		
 		RailCreateManager.Instance.isDerail = true; // いらないかも??
 		getTrain = false;
-
+		createTrain.trainDeparture = true;
 		speedBtnCtl.CheckFrag = true;
 		// #if UNITY_EDITOR_OSX 
 		// 		SceneManager.LoadScene ("CreateRailScene");

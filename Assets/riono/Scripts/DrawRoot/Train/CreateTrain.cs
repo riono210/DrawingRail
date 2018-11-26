@@ -12,7 +12,7 @@ public class CreateTrain : MonoBehaviour {
 
 	private int railNum; // レールの数   
 
-	private bool trainDeparture;
+	[HideInInspector] public bool trainDeparture;
 
 	private void Start () {
 		trainDeparture = true;
@@ -28,7 +28,6 @@ public class CreateTrain : MonoBehaviour {
 	private void Update () {
 #if UNITY_EDITOR_OSX  // editor
 		MakeTrain ();
-
 		// if (!RailCreateManager.Instance.rootExistence) {
 		// 	try {
 		// 		trainInst.GetComponent<TrainDeparture> ();
@@ -46,7 +45,7 @@ public class CreateTrain : MonoBehaviour {
 		}
 
 #elif UNITY_IOS    // 実機
-		Debug.Log ("ios");
+		//Debug.Log ("ios");
 		// 実機では動的にViewFiledが生成されるため、生成後に取得
 		if (RailCreateManager.Instance.ARFiledExist) {
 			if (viewFiled == null) {
@@ -54,9 +53,8 @@ public class CreateTrain : MonoBehaviour {
 				// Debug.Log ("ダメです");
 			}
 			railObj = viewFiled.transform.Find ("RailParent").gameObject;
-			Debug.Log (railObj.name);
+			//Debug.Log (railObj.name);
 			railNum = RailCreateManager.Instance.railNum;
-
 			MakeTrain ();
 
 			// if (trainInst.GetComponent<TrainDeparture> () != null && trainInst.GetComponent<TrainDeparture> ().departure) {
@@ -77,7 +75,6 @@ public class CreateTrain : MonoBehaviour {
 		if (RailCreateManager.Instance.rootExistence) {
 			// レールの0番目を取得
 			Vector3 startRailPos = railObj.transform.GetChild (0).position + (Vector3.up * 0.1f);
-			Debug.Log (startRailPos);
 
 			//レールのインスタンス生成
 			trainInst = Instantiate (trainObj,
@@ -103,7 +100,7 @@ public class CreateTrain : MonoBehaviour {
 			// 0番目にrailObj自体が入ってしまうのでコライダーの有無で判断
 			if (value.GetComponent<BoxCollider> ()) {
 				trainCtr.m_target[index] = value;
-				Debug.Log (value);
+				//Debug.Log (value);
 				index++;
 			}
 		}
@@ -121,19 +118,23 @@ public class CreateTrain : MonoBehaviour {
 
 			trainInst.GetComponent<ObjectController> ().enabled = true;
 			trainInst.SetActive (true);
+
+			yield return new WaitForSeconds (0.1f);
+
+			trainInst.SetActive (false);
+
+			yield return new WaitForSeconds (0.1f);
+
+			trainInst.SetActive (true);
+
 			// 電車が生成されたと通知
 			RailCreateManager.Instance.trainExistence = true;
+			Debug.Log ("sucsess");
 		} else {
 			yield return new WaitForSeconds (0.2f);
 			Debug.Log ("wait");
 			trainDeparture = true;
 		}
-		//trainInst.GetCompeonent<TrainDeparture> ().departure = false;
-		// 誤反応防止のため削除
-		//Destroy (trainInst.GetComponent<TrainDeparture> ());
-		//trainInst.GetComponent<TrainDeparture> ().enabled = false;
-
-		//StartCoroutine (DestroyCmp (trainInst.GetComponent<TrainDeparture> ()));
 	}
 
 	private IEnumerator DestroyCmp (Component cmp) {

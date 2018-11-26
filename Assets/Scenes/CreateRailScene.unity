@@ -771,6 +771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trainObj: {fileID: 1626201471115340, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
   viewFiled: {fileID: 509355202}
+  trainDeparture: 0
 --- !u!114 &1223651447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,6 +785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dangerImg: {fileID: 474968447}
   speedBtnCtl: {fileID: 1223651448}
+  createTrain: {fileID: 1223651446}
 --- !u!114 &1223651448
 MonoBehaviour:
   m_ObjectHideFlags: 0

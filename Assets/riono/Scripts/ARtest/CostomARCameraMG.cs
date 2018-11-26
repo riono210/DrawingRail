@@ -89,7 +89,7 @@ public class CostomARCameraMG : MonoBehaviour {
 
     void Update() {
         int num = planeDetector.GetPlaneNum();
-        Debug.Log("num:" + num);
+        //Debug.Log("num:" + num);
         if (configFlg && num >= 1) {
             StopPlaneConfig();
         }
