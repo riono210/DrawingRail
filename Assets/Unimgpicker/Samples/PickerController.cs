@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace Kakera
 {
@@ -10,7 +11,8 @@ namespace Kakera
 
         [SerializeField]
         //private MeshRenderer imageRenderer;
-        private SpriteRenderer imageRenderer;
+        //private SpriteRenderer imageRenderer;
+        private Image imageRenderer;
 
         void Awake()
         {
@@ -25,7 +27,7 @@ namespace Kakera
             imagePicker.Show("Select Image", "unimgpicker", 1024);
         }
 
-        private IEnumerator LoadImage(string path, /*MeshRenderer*/ SpriteRenderer output)
+        private IEnumerator LoadImage(string path, /*MeshRenderer*/ Image output)
         {
             var url = "file://" + path;
             var www = new WWW(url);
@@ -39,6 +41,9 @@ namespace Kakera
             }
 
             output.sprite = texture_sprite;
+
+            //RailCreateManager.csのSelectTrainに入れることでどこのクラスでも取れる
+            RailCreateManager.Instance.SelectTrain = texture_sprite;
         }
     }
 }
