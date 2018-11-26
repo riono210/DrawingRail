@@ -55,7 +55,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 
 		if (getTrain) {
 			float speed = trainAgent.speed;
-			Debug.Log ("spped:" + speed);
+			//Debug.Log ("spped:" + speed);
 
 			// 脱線する速度限界
 			if (speed >= derailSpeed) {
@@ -129,6 +129,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 		Destroy (train);
 		Destroy (trainChiled);
 		RailCreateManager.Instance.rootExistence = true; // 電車生成に関するフラグ
+		
 		RailCreateManager.Instance.isDerail = true; // いらないかも??
 		getTrain = false;
 

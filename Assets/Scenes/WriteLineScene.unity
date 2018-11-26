@@ -1549,12 +1549,13 @@ MonoBehaviour:
   linePoints: []
   createRender: {fileID: 0}
   positionDiff: {x: 0, y: 0, z: 0}
-  railExistence: 0
-  rootExistence: 0
   railNum: 0
-  ARFiledExist: 0
-  trainExistence: 0
   manager: {fileID: 0}
+  ARFiledExist: 0
+  railExistence: 0
+  shapeRail: 0
+  rootExistence: 0
+  trainExistence: 0
   isDerail: 0
 --- !u!4 &2054845115
 Transform:

@@ -12,7 +12,11 @@ public class CreateTrain : MonoBehaviour {
 
 	private int railNum; // レールの数   
 
+	private bool trainDeparture;
+
 	private void Start () {
+		trainDeparture = true;
+
 #if UNITY_EDITOR_OSX
 		// レールobjとレールの数を取得
 		railObj = viewFiled.transform.Find ("RailParent").gameObject;
@@ -25,21 +29,21 @@ public class CreateTrain : MonoBehaviour {
 #if UNITY_EDITOR_OSX  // editor
 		MakeTrain ();
 
-		if (!RailCreateManager.Instance.trainExistence) {
-			try {
-				trainInst.GetComponent<TrainDeparture> ();
-				if (trainInst.GetComponent<TrainDeparture> ().departure) {
-					StartCoroutine (StartDeparture ());
-				}
-			} catch (System.NullReferenceException) {
-				//Debug.Log ("error");
-			}
-		}
-		// if (trainInst.GetComponent<TrainDeparture> () != null && trainInst.GetComponent<TrainDeparture> ().departure) {
-		// 	StartCoroutine (StartDeparture ());
-		// } else {
-		// 	Debug.Log ("error");
+		// if (!RailCreateManager.Instance.rootExistence) {
+		// 	try {
+		// 		trainInst.GetComponent<TrainDeparture> ();
+		// 		if (trainInst.GetComponent<TrainDeparture> ().departure) {
+		// 			Debug.Log (trainInst.GetComponent<TrainDeparture> ().departure);
+		// 			StartCoroutine (StartDeparture ());
+		// 		}
+		// 	} catch (System.NullReferenceException) {
+		// 		Debug.Log ("error");
+		// 	}
 		// }
+		if (trainDeparture) {
+			StartCoroutine (StartDeparture ());
+			trainDeparture = false;
+		}
 
 #elif UNITY_IOS    // 実機
 		Debug.Log ("ios");
@@ -55,8 +59,12 @@ public class CreateTrain : MonoBehaviour {
 
 			MakeTrain ();
 
-			if (trainInst.GetComponent<TrainDeparture> () != null && trainInst.GetComponent<TrainDeparture> ().departure) {
+			// if (trainInst.GetComponent<TrainDeparture> () != null && trainInst.GetComponent<TrainDeparture> ().departure) {
+			// 	StartCoroutine (StartDeparture ());
+			// }
+			if (trainDeparture) {
 				StartCoroutine (StartDeparture ());
+				trainDeparture = false;
 			}
 
 		}
@@ -103,16 +111,35 @@ public class CreateTrain : MonoBehaviour {
 
 	// そのままだとNavMeshが効かないため、一度消してactiveにする
 	private IEnumerator StartDeparture () {
-		trainInst.SetActive (false);
+		Debug.Log ("call corutin");
+		GameObject train = trainInst;
+		if (train != null) {
 
-		yield return new WaitForSeconds (0.5f);
+			trainInst.SetActive (false);
 
-		trainInst.GetComponent<ObjectController> ().enabled = true;
-		trainInst.SetActive (true);
-		// 電車が生成されたと通知
-		RailCreateManager.Instance.trainExistence = true;
+			yield return new WaitForSeconds (0.5f);
+
+			trainInst.GetComponent<ObjectController> ().enabled = true;
+			trainInst.SetActive (true);
+			// 電車が生成されたと通知
+			RailCreateManager.Instance.trainExistence = true;
+		} else {
+			yield return new WaitForSeconds (0.2f);
+			Debug.Log ("wait");
+			trainDeparture = true;
+		}
+		//trainInst.GetCompeonent<TrainDeparture> ().departure = false;
 		// 誤反応防止のため削除
-		Destroy (trainInst.GetComponent<TrainDeparture> ());
+		//Destroy (trainInst.GetComponent<TrainDeparture> ());
+		//trainInst.GetComponent<TrainDeparture> ().enabled = false;
+
+		//StartCoroutine (DestroyCmp (trainInst.GetComponent<TrainDeparture> ()));
+	}
+
+	private IEnumerator DestroyCmp (Component cmp) {
+		Destroy (cmp);
+
+		yield return null;
 	}
 
 	// 生成したtrainを返す

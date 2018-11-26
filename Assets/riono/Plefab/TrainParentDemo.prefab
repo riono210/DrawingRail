@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 195312316499731492}
   - component: {fileID: 114336039333648760}
   - component: {fileID: 65227949819393230}
-  - component: {fileID: 114013658909569068}
   - component: {fileID: 54251138663961770}
   m_Layer: 0
   m_Name: TrainParentDemo
@@ -114,18 +113,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0000007, y: 1.59, z: 0.20000005}
   m_Center: {x: 0, y: 0, z: 0.00000011920929}
---- !u!114 &114013658909569068
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1626201471115340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62285cdc2349b4197b3f16815c885b2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  departure: 0
 --- !u!114 &114336039333648760
 MonoBehaviour:
   m_ObjectHideFlags: 1
