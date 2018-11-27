@@ -591,6 +591,7 @@ MonoBehaviour:
   positionDiff: {x: 0, y: 0, z: 0}
   railNum: 0
   manager: {fileID: 0}
+  SelectTrain: {fileID: 0}
   ARFiledExist: 0
   railExistence: 0
   shapeRail: 0
@@ -742,7 +743,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e278d7202accc4952a9c16ac440297ab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7e03601aedbb4e8faf68a7d9920a3d0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
