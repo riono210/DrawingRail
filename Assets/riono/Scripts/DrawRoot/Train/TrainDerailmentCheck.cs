@@ -129,6 +129,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 
 		Destroy (train);
 		Destroy (trainChiled);
+		dangerImg.SetActive (false);
 		RailCreateManager.Instance.rootExistence = true; // 電車生成に関するフラグ
 		RailCreateManager.Instance.isDerail = true; // いらないかも??
 		getTrain = false;

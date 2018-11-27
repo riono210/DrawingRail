@@ -161,7 +161,7 @@ public class CreateRale : MonoBehaviour {
         //Debug.Log ("diff:" + diff + " rail:" + railSize.x);
 
         // 二点間の距離がレールの元サイズよりも大きいとき
-        if (diff >= railSize.x) {
+        if (diff > railSize.x) {
             // 調整値を計算
             float xSize = (diff - railSize.x);
             // NavMeshができるよう調整
@@ -169,7 +169,7 @@ public class CreateRale : MonoBehaviour {
 
             rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
 
-        } else if (diff < railSize.x) { // 二点間の距離がレールの元サイズよりも小さい時
+        } else if (diff <= railSize.x) { // 二点間の距離がレールの元サイズよりも小さい時
             // 調整値を計算
             float xSize = (railSize.x - diff);
             // NavMeshができるよう調整
@@ -191,16 +191,16 @@ public class CreateRale : MonoBehaviour {
     // レール幅の再調整　NavMesh適応後
     private void AdjustRail () {
 
-        var railChiled = railParent.transform.GetComponentsInChildren<Transform> ();
-        foreach (var value in railChiled) {
-            // 0番目にrailObj自体が入ってしまうのでコライダーの有無で判断
-            if (value.GetComponent<BoxCollider> ()) {
-                Vector3 chiledScale = value.transform.localScale;
-                value.transform.localScale =
-                    new Vector3 (chiledScale.x, chiledScale.y, 0.08f);
-                // Debug.Log (value);
-            }
-        }
+        // var railChiled = railParent.transform.GetComponentsInChildren<Transform> ();
+        // foreach (var value in railChiled) {
+        //     // 0番目にrailObj自体が入ってしまうのでコライダーの有無で判断
+        //     if (value.GetComponent<BoxCollider> ()) {
+        //         Vector3 chiledScale = value.transform.localScale;
+        //         value.transform.localScale =
+        //             new Vector3 (chiledScale.x, chiledScale.y, 0.08f);
+        //         // Debug.Log (value);
+        //     }
+        // }
         RailCreateManager.Instance.shapeRail = false;
         RailCreateManager.Instance.rootExistence = true;
     }
