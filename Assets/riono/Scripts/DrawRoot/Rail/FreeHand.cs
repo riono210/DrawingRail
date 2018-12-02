@@ -25,6 +25,10 @@ public class FreeHand : MonoBehaviour {
 
     public GameObject managerObj; // ゲームマネージャー
 
+
+    private AudioSource audioSourceOfResetButton; //ResetBtn用の音
+    private AudioSource audioSourceOfCreateButton; //CreateBtn用の音
+
     void Start () {
 
         if (CameraObj == null) {
@@ -37,6 +41,11 @@ public class FreeHand : MonoBehaviour {
 
         xRange = fieldRange.GetRange ("x");
         zRange = fieldRange.GetRange ("z");
+
+
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        audioSourceOfResetButton = audioSources[1];
+        audioSourceOfCreateButton = audioSources[0];
     }
 
     void Update () {
@@ -217,4 +226,17 @@ public class FreeHand : MonoBehaviour {
             }
         }
     }
+
+    //ResetBtnが押された時の処理
+    public void ResetButtonClicked(){
+        audioSourceOfResetButton.Play();
+        Reset();
+    }
+    //CreateBtnが押された時の処理
+    public void CreateButtonClicked(){
+		audioSourceOfCreateButton.Play();
+		float SoundTime = 0.7f;
+	    //DelayMethodを1.0秒後に呼び出す
+    	Invoke("CreateRail", SoundTime);
+	}
 }
