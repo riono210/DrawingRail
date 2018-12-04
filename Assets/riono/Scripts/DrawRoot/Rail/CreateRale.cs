@@ -165,7 +165,7 @@ public class CreateRale : MonoBehaviour {
             // 調整値を計算
             float xSize = (diff - railSize.x);
             // NavMeshができるよう調整
-            xSize *= 1.1f;
+            xSize *= 1.2f;
 
             rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
 
@@ -173,7 +173,7 @@ public class CreateRale : MonoBehaviour {
             // 調整値を計算
             float xSize = (railSize.x - diff);
             // NavMeshができるよう調整
-            xSize *= 0.5f;
+            xSize *= 0.8f;
 
             rail.transform.localScale = new Vector3 (railSize.x - xSize, railSize.y, railSize.z);
         }
