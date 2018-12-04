@@ -205,8 +205,6 @@ MonoBehaviour:
   resetFlg: 0
   clickFlg: 0
   managerObj: {fileID: 0}
-  audioSourceOfResetButton: {fileID: 0}
-  audioSourceOfCreateButton: {fileID: 0}
 --- !u!4 &220135556
 Transform:
   m_ObjectHideFlags: 0
@@ -255,8 +253,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -45}
-  m_SizeDelta: {x: 80, y: 60}
+  m_AnchoredPosition: {x: 50, y: -42}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &238896024
 MonoBehaviour:
@@ -341,7 +339,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1006d9176257f46c098341682271b2b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd9ee02521f754c9d9464e3f209f1fdf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
