@@ -5,40 +5,43 @@ using UnityEngine.SceneManagement;
 
 public class NextButton : MonoBehaviour {
 	public AudioSource audioSource;
-	
-	public void ButtonClicked(){
-		audioSource.Play();
+
+	public void ButtonClicked () {
+		audioSource.Play ();
 		float SoundTime = 0.15f;
-	    //DelayMethodを3.5秒後に呼び出す
-    	Invoke("MoveScene", SoundTime);
+		//DelayMethodを3.5秒後に呼び出す
+		Invoke ("MoveScene", SoundTime);
 	}
 
-	void MoveScene(){
+	void MoveScene () {
 		// TitleScene -> Picker -> WriteLineScene -> CreateRailScene
-		string SceneName =	SceneManager.GetActiveScene().name;
-		switch(SceneName){
+		string SceneName = SceneManager.GetActiveScene ().name;
+		switch (SceneName) {
 			case "TitleScene":
-				SceneManager.LoadScene("Picker");
+				//SceneManager.LoadScene("Picker");
+				Fanctions.Instance.LoadScene ("Picker");
 				break;
 			case "Picker":
-				SceneManager.LoadScene("WriteLineScene");
+				//SceneManager.LoadScene ("WriteLineScene");
+				Fanctions.Instance.LoadScene ("WriteLineScene");
 				break;
 			case "WriteLineScene":
-				SceneManager.LoadScene("CreateRailScene");
+				//SceneManager.LoadScene ("CreateRailScene");
+				Fanctions.Instance.LoadScene ("CreateRailScene");
 				break;
 			default:
-				Debug.Log(SceneManager.GetActiveScene().name + "というシーンは存在しません");
+				Debug.Log (SceneManager.GetActiveScene ().name + "というシーンは存在しません");
 				break;
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		audioSource = gameObject.GetComponent<AudioSource>();
+		audioSource = gameObject.GetComponent<AudioSource> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 }

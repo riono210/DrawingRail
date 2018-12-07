@@ -14,11 +14,11 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	[HideInInspector] public int railNum;
 	// manager staticなため取得可能
 	[HideInInspector] public GameObject manager;
-    //Sprite型の選択した電車の画像
-    [HideInInspector] public Sprite SelectTrain;
+	//Sprite型の選択した電車の画像
+	[HideInInspector] public Sprite SelectTrain;
 
-    // 実機上でViewFiledが生成されたか  0
-    [HideInInspector] public bool ARFiledExist;
+	// 実機上でViewFiledが生成されたか  0
+	[HideInInspector] public bool ARFiledExist;
 	// NavMeshを生成できるか  1
 	[HideInInspector] public bool railExistence;
 	// レールが調整されたか　　2
@@ -30,6 +30,9 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	// 電車が脱線したか　  5
 	[HideInInspector] public bool isDerail;
 
+	// フェードイメージ
+	//[HideInInspector] public GameObject FadeImage;
+
 	// 初期化
 	protected override void Awake () {
 		Debug.Log ("init!");
@@ -40,7 +43,8 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 		positionDiff = Vector3.zero;
 		railNum = 0;
 		manager = this.gameObject;
-        SelectTrain = null;
+		SelectTrain = null;
+		//FadeImage = null;
 
 		ARFiledExist = false;
 		railExistence = false;
