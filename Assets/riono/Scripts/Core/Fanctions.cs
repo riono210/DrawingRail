@@ -10,8 +10,12 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 	private bool isFadeOut;
 	private bool isMove;
 
+	private bool isStartFade;
+
 	// フェードアウトマスク
 	public Image fadeImage;
+	public Image startFadeImage;
+
 	// フェイドインアウトするスピード
 	private float fadeSpeed = 0.02f;
 	// マスクの色
@@ -19,6 +23,11 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 	green,
 	blue,
 	alfa;
+
+	private float redS,
+	greenS,
+	blueS,
+	alfaS;
 
 	// シーンの名前
 	private string sceneName;
@@ -31,28 +40,30 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 
 	// Use this for initialization
 	void Start () {
+		isFadeOut = false;
+		isMove = false;
+		isFadeIn = false;
+
+		isStartFade = true;
+
 		//fadeImage = this.GetComponent<Image> ();
 		Debug.Log (fadeImage);
 		red = fadeImage.color.r;
 		green = fadeImage.color.g;
 		blue = fadeImage.color.b;
 		alfa = fadeImage.color.a;
+
+		redS = startFadeImage.color.r;
+		greenS = startFadeImage.color.g;
+		blueS = startFadeImage.color.b;
+		alfaS = startFadeImage.color.a;
 	}
 
 	// Update is called once per frame
 	void Update () {
-
-		if (isFadeOut) {
-			FadeOut ();
-		}
-
-		if (isFadeIn) {
-			FadeIn ();
-		}
-
-		if (isMove) {
-			MoveScene ();
-		}
+		SFadeIn ();
+		
+		NomalFade ();
 	}
 
 	// フェードイン
@@ -96,5 +107,38 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 		sceneName = null;
 		isMove = false;
 		isFadeIn = true;
+	}
+
+	// 通常のfade Update管理
+	private void NomalFade () {
+		if (isFadeOut) {
+			FadeOut ();
+		}
+
+		if (isFadeIn) {
+			FadeIn ();
+		}
+
+		if (isMove) {
+			MoveScene ();
+		}
+	}
+
+	// スタート時フェードイン
+	private void SFadeIn () {
+		if (isStartFade) {
+			alfaS -= fadeSpeed;
+			setStartAlfa ();
+
+			if (alfaS <= 0) {
+				isStartFade = false;
+				startFadeImage.enabled = false;
+
+			}
+		}
+	}
+
+	private void setStartAlfa () {
+		startFadeImage.color = new Color (redS, greenS, blueS, alfaS);
 	}
 }
