@@ -22,6 +22,8 @@ public class TrainDerailmentCheck : MonoBehaviour {
 	public GetObjectController speedBtnCtl; // 速度調節ボタンのイベント設定クラス
 	public CreateTrain createTrain; // 電車生成クラス
 
+	public GameObject explosionParticle; // 爆発パーティクル
+
 	// Use this for initialization
 	void Start () {
 		getTrain = false;
@@ -119,7 +121,11 @@ public class TrainDerailmentCheck : MonoBehaviour {
 		Vector3 derailForceY = trainChiled.transform.up;
 		Vector3 derailForceZ = trainChiled.transform.forward;
 		childRb.AddForce (derailForceX * 500 + derailForceY * 10 + derailForceZ * 50);
-
+		// 爆発
+		if (explosionParticle != null) {
+			GameObject explosionObj = Instantiate (explosionParticle, trainChiled.transform.position, Quaternion.identity);
+			Destroy (explosionObj, 2.5f);
+		}
 		StartCoroutine (ReloadScene ());
 	}
 
@@ -141,4 +147,5 @@ public class TrainDerailmentCheck : MonoBehaviour {
 		// 		SceneManager.LoadScene ("ARTestScene");
 		// #endif
 	}
+
 }
