@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CreateButtonClicked : MonoBehaviour {
 	public AudioSource audioSource;
+	public AudioSource bgm;
 	public void ButtonClicked(){
 		audioSource.Play();
+		Destroy(bgm);
 	}
 
 	// Use this for initialization

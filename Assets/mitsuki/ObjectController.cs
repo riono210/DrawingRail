@@ -17,9 +17,11 @@ public class ObjectController : MonoBehaviour {
 
     public void GoButtonDown () {
         m_navAgent.speed += 0.05f;
+        bgmPitchManager.pitchUp();
     }
     public void StopButtonDown () {
         m_navAgent.speed -= 0.05f;
+        bgmPitchManager.pitchDown();
     }
 
     private void Start () {
