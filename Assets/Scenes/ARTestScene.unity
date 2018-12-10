@@ -680,6 +680,8 @@ MonoBehaviour:
   dangerImg: {fileID: 406662337}
   speedBtnCtl: {fileID: 597987141}
   createTrain: {fileID: 597987137}
+  explosionParticle: {fileID: 1042652214879784, guid: 09b67e0bd76634073b81817462d6e1e1,
+    type: 2}
 --- !u!1 &676078922
 GameObject:
   m_ObjectHideFlags: 0
