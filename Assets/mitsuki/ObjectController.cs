@@ -11,17 +11,19 @@ public class ObjectController : MonoBehaviour {
 
     private NavMeshAgent m_navAgent = null;
 
+    private BGMController bgmController;
+
     private void Awake () {
         GetNavMeshAgent ();
     }
 
     public void GoButtonDown () {
         m_navAgent.speed += 0.05f;
-        bgmPitchManager.pitchUp();
+        bgmController.pitchUp(); //bgmを速くする
     }
     public void StopButtonDown () {
         m_navAgent.speed -= 0.05f;
-        bgmPitchManager.pitchDown();
+        bgmController.pitchDown(); //bgmを遅くする
     }
 
     private void Start () {
@@ -30,6 +32,8 @@ public class ObjectController : MonoBehaviour {
         if (m_target != null) {
             m_navAgent.destination = m_target[currnetTartget].position;
         }
+
+        bgmController = GameObject.Find("BGM").GetComponent<BGMController>();//BGMの速度を変更するやつ
     }
 
     private void Update () {

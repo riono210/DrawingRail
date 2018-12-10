@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
-public class bgmPitchManager : MonoBehaviour {
-	public static AudioSource bgm;
+public class BGMController : MonoBehaviour {
+	public AudioSource bgm;
 	public AudioClip titleBGM;
 	public AudioClip trainBGM;
+	public AudioMixer masterMixer;
 
 	private string beforeScene = "TitleScene";
 
-	private static float minPitch = 0.5f;
-	private static float maxPitch = 2.0f;
-	private static float pitchInterval = 0.05f;
+	private float initSpeed = 0.5f; //電車が走るシーンでのbgmの初期スピード
+	private float initPitch = 2.0f; //電車が走るシーンでのbgmの初期ピッチ
+
+	private float speed = 1.0f;
+	private float pitch = 1.0f;
+	private float bgmInterval = 1.2f;
 
 	// Use this for initialization
 	void Start () {
@@ -36,43 +41,49 @@ public class bgmPitchManager : MonoBehaviour {
             bgm.Stop ();
             bgm.clip = trainBGM;    //流すクリップを切り替える
             bgm.Play ();
-			bgm.pitch = 0.5f;
+			speed = initSpeed;
+			pitch = initPitch;
+			setAudioMixerParam(speed, pitch);
         }
-
         //電車が走るシーンから戻った時
         if (beforeScene == "ARTestScene" | beforeScene == "CreateRailScene" ){
             bgm.Stop ();
             bgm.clip = titleBGM;    //流すクリップを切り替える
             bgm.Play ();
-			bgm.pitch = 1.0f;
+			speed = 1.0f;
+			pitch = 1.0f;
+			setAudioMixerParam(speed, pitch);
         }
 		beforeScene = nextScene.name; //prevSceneはNullが入るので、こちらで代用
     }
 
-	//BGMのピッチをあげる
-	public static void pitchUp(){
-		Debug.Log("currentPitch = " + bgm.pitch + "maxPitch = " + maxPitch);
-		if(bgm.pitch < maxPitch){
-			bgm.pitch += pitchInterval;
+	//AudioMixerのPitch(speed)とpitchShifter.pitch(pitch)を変更する関数
+	public void setAudioMixerParam(float speed, float pitch){
+		masterMixer.SetFloat("speed", speed);
+		masterMixer.SetFloat("pitch", pitch);
+	}
+
+	//BGMを速くする関数
+	public void pitchUp(){
+		speed *= bgmInterval;
+		pitch /= bgmInterval;
+		setAudioMixerParam(speed, pitch);
+	}
+
+	//BGMを遅くする関数
+	public void pitchDown(){
+		if (speed > initSpeed){
+			speed /= bgmInterval;
+			pitch *= bgmInterval;
+			setAudioMixerParam(speed, pitch);
 		}
 	}
 
-	//BGMのピッチを下げる
-	public static void pitchDown(){
-		Debug.Log("currentPitch = " + bgm.pitch + "##################### minPitch = " + minPitch);
-		if(bgm.pitch > minPitch){
-			bgm.pitch -= pitchInterval;
-		}
-	}
-
-	//BGMのピッチを指定する
-	public static void pitchSet(float n){
-		bgm.pitch = n;
-	}
-
-	//BGMをリセットする
-	public static void bgmReset(){
-		pitchSet(minPitch); //pitchを初期化
+	//BGMをリセットする関数
+	public void bgmReset(){
+		speed = initSpeed;
+		pitch = initPitch;
+		setAudioMixerParam(speed, pitch);
 		bgm.Stop();
 		bgm.Play();
 	}
