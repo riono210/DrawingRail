@@ -69,6 +69,13 @@ public class bgmPitchManager : MonoBehaviour {
 	public static void pitchSet(float n){
 		bgm.pitch = n;
 	}
+
+	//BGMをリセットする
+	public static void bgmReset(){
+		pitchSet(minPitch); //pitchを初期化
+		bgm.Stop();
+		bgm.Play();
+	}
 }
  
 
