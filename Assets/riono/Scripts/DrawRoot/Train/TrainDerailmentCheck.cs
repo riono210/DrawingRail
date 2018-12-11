@@ -24,11 +24,15 @@ public class TrainDerailmentCheck : MonoBehaviour {
 
 	public GameObject explosionParticle; // 爆発パーティクル
 
+	public BGMController bgmController; // bgmのBPM調整
+
 	// Use this for initialization
 	void Start () {
 		getTrain = false;
 		derailSpeed = 0.5f;
 		isDerail = false;
+
+		bgmController = GameObject.Find ("BGM").GetComponent<BGMController> ();
 
 	}
 
@@ -135,6 +139,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 
 		Destroy (train);
 		Destroy (trainChiled);
+		bgmController.bgmReset ();
 		dangerImg.SetActive (false);
 		RailCreateManager.Instance.rootExistence = true; // 電車生成に関するフラグ
 		RailCreateManager.Instance.isDerail = true; // いらないかも??
