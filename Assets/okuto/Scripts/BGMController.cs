@@ -4,6 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
+
+/*
+	使い方(BGMをリセットする)
+	private BGMController bgmController;
+	void Start(){
+		bgmController = GameObject.Find("BGM").GetComponent<BGMController>();
+	}
+	bgmController.bgmReset();
+ */
+ 
 public class BGMController : MonoBehaviour {
 	public AudioSource bgm;
 	public AudioClip titleBGM;
@@ -37,7 +47,7 @@ public class BGMController : MonoBehaviour {
 	//シーンが切り替わった時に呼ばれるメソッド
     void OnActiveSceneChanged ( Scene prevScene, Scene nextScene ) {
         //電車が走るシーンへ移動
-        if (beforeScene == "WriteLineScene" && nextScene.name == "ARTestScene" | beforeScene == "WriteLineScene" && nextScene.name == "CreateRailScene") {
+        if (beforeScene == "WriteLineScene" && nextScene.name == "ARTestScene" || beforeScene == "WriteLineScene" && nextScene.name == "CreateRailScene") {
             bgm.Stop ();
             bgm.clip = trainBGM;    //流すクリップを切り替える
             bgm.Play ();
@@ -46,7 +56,7 @@ public class BGMController : MonoBehaviour {
 			setAudioMixerParam(speed, pitch);
         }
         //電車が走るシーンから戻った時
-        if (beforeScene == "ARTestScene" | beforeScene == "CreateRailScene" ){
+        if (beforeScene == "ARTestScene" || beforeScene == "CreateRailScene" ){
             bgm.Stop ();
             bgm.clip = titleBGM;    //流すクリップを切り替える
             bgm.Play ();
