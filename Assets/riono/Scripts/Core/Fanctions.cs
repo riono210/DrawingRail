@@ -18,6 +18,7 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 
 	// フェイドインアウトするスピード
 	private float fadeSpeed = 0.02f;
+	private float startFadeSpeed = 0.08f;
 	// マスクの色
 	private float red,
 	green,
@@ -62,7 +63,7 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 	// Update is called once per frame
 	void Update () {
 		SFadeIn ();
-		
+
 		NomalFade ();
 	}
 
@@ -127,7 +128,7 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 	// スタート時フェードイン
 	private void SFadeIn () {
 		if (isStartFade) {
-			alfaS -= fadeSpeed;
+			alfaS -= startFadeSpeed;
 			setStartAlfa ();
 
 			if (alfaS <= 0) {

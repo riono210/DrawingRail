@@ -25,7 +25,6 @@ public class FreeHand : MonoBehaviour {
 
     public GameObject managerObj; // ゲームマネージャー
 
-
     private AudioSource audioSourceOfResetButton; //ResetBtn用の音
     private AudioSource audioSourceOfCreateButton; //CreateBtn用の音
 
@@ -42,8 +41,7 @@ public class FreeHand : MonoBehaviour {
         xRange = fieldRange.GetRange ("x");
         zRange = fieldRange.GetRange ("z");
 
-
-        AudioSource[] audioSources = GetComponents<AudioSource>();
+        AudioSource[] audioSources = GetComponents<AudioSource> ();
         audioSourceOfResetButton = audioSources[1];
         audioSourceOfCreateButton = audioSources[0];
     }
@@ -169,9 +167,9 @@ public class FreeHand : MonoBehaviour {
         if (linePoints.Count () >= 5) {
             RailCreateManager.Instance.linePoints = linePoints;
 #if UNITY_EDITOR_OSX 
-            SceneManager.LoadScene ("CreateRailScene");
+            Fanctions.Instance.LoadScene ("CreateRailScene");
 #elif UNITY_IOS 
-            SceneManager.LoadScene ("ARTestScene");
+            Fanctions.Instance.LoadScene ("ARTestScene");
 #endif
         } else {
             Reset ();
@@ -228,15 +226,15 @@ public class FreeHand : MonoBehaviour {
     }
 
     //ResetBtnが押された時の処理
-    public void ResetButtonClicked(){
-        audioSourceOfResetButton.Play();
-        Reset();
+    public void ResetButtonClicked () {
+        audioSourceOfResetButton.Play ();
+        Reset ();
     }
     //CreateBtnが押された時の処理
-    public void CreateButtonClicked(){
-		audioSourceOfCreateButton.Play();
-		float SoundTime = 0.7f;
-	    //DelayMethodを1.0秒後に呼び出す
-    	Invoke("CreateRail", SoundTime);
-	}
+    public void CreateButtonClicked () {
+        audioSourceOfCreateButton.Play ();
+        float SoundTime = 0.7f;
+        //DelayMethodを1.0秒後に呼び出す
+        Invoke ("CreateRail", SoundTime);
+    }
 }
