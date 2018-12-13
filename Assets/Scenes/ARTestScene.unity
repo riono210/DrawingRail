@@ -682,6 +682,7 @@ MonoBehaviour:
   createTrain: {fileID: 597987137}
   explosionParticle: {fileID: 1042652214879784, guid: 09b67e0bd76634073b81817462d6e1e1,
     type: 2}
+  bgmController: {fileID: 0}
 --- !u!1 &676078922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,7 +1637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5413caa56c4254d18b8ab52c15c56c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planePrefab: {fileID: 1983520619281468, guid: 9eb96f002ffce4560879b18f2e0502e5,
+  planePrefab: {fileID: 1372998203143648, guid: f879aaf3eeb0c467eb22cbaf08dc97a4,
     type: 2}
   fieldPrefab: {fileID: 1896969720823680, guid: 5b20c924be96547988fb9db76c0f0f52,
     type: 2}
