@@ -81,17 +81,21 @@ public class CreateTrain : MonoBehaviour {
 				startRailPos,
 				Quaternion.identity);
 
-            //trainInstの子供を宣言
-            GameObject trainChild = trainInst.transform.Find("Train").gameObject;
+			//trainInstの子供を宣言
+			GameObject trainChild = trainInst.transform.Find ("Train/TrainSprite").gameObject;
 
-            //TrainのSpriteRendererを取得
-            SpriteRenderer TrainSprite = trainChild.GetComponent<SpriteRenderer>();
+			//TrainのSpriteRendererを取得
+			SpriteRenderer TrainSprite = trainChild.GetComponent<SpriteRenderer> ();
 
-            //貼り付けるもの = 画像
-            TrainSprite.sprite = RailCreateManager.Instance.SelectTrain;
+			//貼り付けるもの = 画像
+			TrainSprite.sprite = RailCreateManager.Instance.SelectTrain;
+			// デフォルトの場合電車の表示位置調整
+			if (TrainSprite.sprite.name == "car_bus_jr") {
+				Debug.Log ("defaul train");
+				trainChild.transform.localPosition = Vector3.zero;
+			}
 
-
-            SetRoot ();
+			SetRoot ();
 
 			RailCreateManager.Instance.rootExistence = false;
 		}
