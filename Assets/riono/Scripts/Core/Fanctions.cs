@@ -18,7 +18,7 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 
 	// フェイドインアウトするスピード
 	private float fadeSpeed = 0.02f;
-	private float startFadeSpeed = 0.08f;
+	private float startFadeSpeed = 0.02f;
 	// マスクの色
 	private float red,
 	green,
@@ -48,12 +48,13 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 		isStartFade = true;
 
 		//fadeImage = this.GetComponent<Image> ();
-		Debug.Log (fadeImage);
+
 		red = fadeImage.color.r;
 		green = fadeImage.color.g;
 		blue = fadeImage.color.b;
 		alfa = fadeImage.color.a;
 
+		Debug.Log ("get");
 		redS = startFadeImage.color.r;
 		greenS = startFadeImage.color.g;
 		blueS = startFadeImage.color.b;
