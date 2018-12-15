@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1896969720823680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.18, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.017}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -57,3 +57,7 @@ MonoBehaviour:
   lineColor: {r: 0, g: 0, b: 0, a: 0}
   lineWidth: 0.01
   railPrefab: {fileID: 1711903219034086, guid: a5db17ecd02e14285b79dc97673db127, type: 2}
+  entityPrefab: {fileID: 1422336582180988, guid: 96832a98cc2f5453db6518454be54d6e,
+    type: 2}
+  railParent: {fileID: 0}
+  entityRailParet: {fileID: 0}

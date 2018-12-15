@@ -16,7 +16,10 @@ public class CreateRale : MonoBehaviour {
 
     private int totalCount; // 頂点の数
     public GameObject railPrefab; // レールプレファブ
+    public GameObject entityPrefab; // 実体レールプレファブ
     [HideInInspector] public GameObject railParent;
+    // 実体のレールの親
+    [HideInInspector] public GameObject entityRailParet;
 
     // Use this for initialization
     void Start () {
@@ -48,7 +51,7 @@ public class CreateRale : MonoBehaviour {
 #if UNITY_EDITOR
         lineObject.transform.localPosition = new Vector3 (0, 1, 0);
 #else
-        lineObject.transform.localPosition = new Vector3 (0, 1f, 0);
+        lineObject.transform.localPosition = Vector3.zero;
 #endif
         //lineObject.transform.localScale = new Vector3 (0.5f, 3, 0.5f);
 
@@ -121,9 +124,14 @@ public class CreateRale : MonoBehaviour {
         railParent.transform.parent = filedObj.transform;
         int railCount;
 
+        // レールの実体の親を生成
+        entityRailParet = new GameObject ();
+        entityRailParet.name = "EntityRailParent";
+        entityRailParet.transform.parent = filedObj.transform;
+
         for (railCount = 0; railCount < totalCount; railCount++) {
             // float childIndex = childTransfrom.GetComponent<PointToObject> ().lineIndex;
-
+            // 今と次の子供を取得
             Transform currentChild = lineObject.transform.GetChild (railCount);
             Transform nextChild = lineObject.transform.GetChild ((railCount + 1) % totalCount);
 
@@ -140,9 +148,22 @@ public class CreateRale : MonoBehaviour {
 
             SetSize (currentChild.position, nextChild.position, raileInstance.transform);
             raileInstance.name = "rail_" + railCount;
+
+            //if (railCount % 2 == 0 && railCount < totalCount) {
+                // 実体インスタンス
+                GameObject entityRailInstanc = Instantiate (entityPrefab,
+                    newPosition,
+                    Quaternion.Euler (90, -xzAngle, 0),
+                    entityRailParet.transform);
+
+                EntitySetSize (currentChild.position, nextChild.position, entityRailInstanc.transform);
+                entityRailInstanc.name = "entityRail_" + railCount;
+            //}
         }
 
         RailCreateManager.Instance.railNum = railCount;
+
+        lineObject.SetActive (false);
     }
 
     // 二点間の中心点
@@ -174,6 +195,32 @@ public class CreateRale : MonoBehaviour {
             float xSize = (railSize.x - diff);
             // NavMeshができるよう調整
             xSize *= 0.5f;
+
+            rail.transform.localScale = new Vector3 (railSize.x - xSize, railSize.y, railSize.z);
+        }
+    }
+
+    // レールのサイズ(長さ)調整
+    private void EntitySetSize (Vector3 origin, Vector3 next, Transform rail) {
+
+        float diff = Vector3.Distance (origin, next);
+        Vector3 railSize = rail.transform.localScale;
+        //Debug.Log ("diff:" + diff + " rail:" + railSize.x);
+
+        // 二点間の距離がレールの元サイズよりも大きいとき
+        if (diff > railSize.x) {
+            // 調整値を計算
+            float xSize = (diff - railSize.x);
+            // NavMeshができるよう調整
+            xSize *= 1.2f;
+
+            rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
+
+        } else if (diff <= railSize.x) { // 二点間の距離がレールの元サイズよりも小さい時
+            // 調整値を計算
+            float xSize = (railSize.x - diff);
+            // NavMeshができるよう調整
+            xSize *= 0.7f;
 
             rail.transform.localScale = new Vector3 (railSize.x - xSize, railSize.y, railSize.z);
         }
