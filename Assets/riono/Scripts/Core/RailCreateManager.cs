@@ -15,7 +15,7 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 	// manager staticなため取得可能
 	[HideInInspector] public GameObject manager;
 	//Sprite型の選択した電車の画像
-	[HideInInspector] public Sprite SelectTrain;
+	[HideInInspector] public Texture SelectTrain;
 
 	// 実機上でViewFiledが生成されたか  0
 	[HideInInspector] public bool ARFiledExist;
@@ -56,6 +56,10 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 
 	// Use this for initialization
 	void Start () {
+
+	}
+
+	public void ResetParam(){
 
 	}
 }

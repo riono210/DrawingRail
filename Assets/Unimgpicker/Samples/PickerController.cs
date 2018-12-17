@@ -8,15 +8,16 @@ namespace Kakera {
         private Unimgpicker imagePicker;
 
         [SerializeField]
-        //private MeshRenderer imageRenderer;
+        private MeshRenderer imageRenderer;
         //private SpriteRenderer imageRenderer;
-        private Image imageRenderer;
+
+        //private Image imageRenderer;
 
         [SerializeField] private Sprite defaultSprit;
         void Awake () {
             // デフォルトで電車のスプライトを用意する
-            imageRenderer.sprite = defaultSprit;
-            RailCreateManager.Instance.SelectTrain = defaultSprit;
+            // imageRenderer.sprite = defaultSprit;
+            // RailCreateManager.Instance.SelectTrain = defaultSprit;
 
             imagePicker.Completed += (string path) => {
                 StartCoroutine (LoadImage (path, imageRenderer));
@@ -27,21 +28,22 @@ namespace Kakera {
             imagePicker.Show ("Select Image", "unimgpicker", 1024);
         }
 
-        private IEnumerator LoadImage (string path, /*MeshRenderer*/ Image output) {
+        private IEnumerator LoadImage (string path, MeshRenderer output) {
             var url = "file://" + path;
             var www = new WWW (url);
             yield return www;
 
             var texture = www.texture;
-            Sprite texture_sprite = Sprite.Create (texture, new Rect (0, 0, 500, 500), Vector2.zero);
-            if (texture_sprite == null) {
+            //Sprite texture_sprite = Sprite.Create (texture, new Rect (0, 0, 500, 500), Vector2.zero);
+            if (texture == null) {
                 Debug.LogError ("Failed to load texture url:" + url);
             }
 
-            output.sprite = texture_sprite;
+            // output.sprite = texture_sprite;
+            output.material.mainTexture = texture;
 
             //RailCreateManager.csのSelectTrainに入れることでどこのクラスでも取れる
-            RailCreateManager.Instance.SelectTrain = texture_sprite;
+            RailCreateManager.Instance.SelectTrain = texture;
         }
     }
 }
