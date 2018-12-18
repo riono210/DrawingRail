@@ -17,9 +17,13 @@ public class BackButton : MonoBehaviour {
 		// ARTestScene(CreateRailScene) -> WriteLineScene -> Picker -> TitleScene
 		switch (SceneName) {
 			case "CreateRailScene":
+				Fanctions.Instance.ResetObj ();
+				RailCreateManager.Instance.ResetParam ();
 				Fanctions.Instance.LoadScene ("WriteLineScene");
 				break;
 			case "ARTestScene":
+				Fanctions.Instance.ResetObj ();
+				RailCreateManager.Instance.ResetParam ();
 				Fanctions.Instance.LoadScene ("WriteLineScene");
 				break;
 			case "WriteLineScene":

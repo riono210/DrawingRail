@@ -59,7 +59,18 @@ public class RailCreateManager : SingletonMonoBehaviour<RailCreateManager> {
 
 	}
 
-	public void ResetParam(){
+	public void ResetParam () {
+		linePoints = new List<Vector3> ();
+		createRender = null;
+		positionDiff = Vector3.zero;
+		railNum = 0;
+		manager = this.gameObject;
 
+		ARFiledExist = false;
+		railExistence = false;
+		shapeRail = false;
+		rootExistence = false;
+		trainExistence = false;
+		isDerail = false;
 	}
 }

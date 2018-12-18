@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69c2e486099b4e6a905231020a2b5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainObj: {fileID: 1626201471115340, guid: 33fcb4f78dc4b4ed785536300449cb06, type: 2}
+  trainObj: {fileID: 1832867775510476, guid: 1598ac136dd5f4a0aa23f0b78f2f3913, type: 2}
   viewFiled: {fileID: 0}
   trainDeparture: 0
 --- !u!114 &597987138
@@ -1637,7 +1637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5413caa56c4254d18b8ab52c15c56c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planePrefab: {fileID: 1372998203143648, guid: f879aaf3eeb0c467eb22cbaf08dc97a4,
+  planePrefab: {fileID: 1983520619281468, guid: 9eb96f002ffce4560879b18f2e0502e5,
     type: 2}
   fieldPrefab: {fileID: 1896969720823680, guid: 5b20c924be96547988fb9db76c0f0f52,
     type: 2}

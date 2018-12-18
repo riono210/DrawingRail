@@ -105,6 +105,10 @@ public class CreateTrain : MonoBehaviour {
 			SetRoot ();
 
 			RailCreateManager.Instance.rootExistence = false;
+
+			
+			Fanctions.Instance.train = trainInst;
+			Fanctions.Instance.tainctr = this.gameObject;
 		}
 	}
 

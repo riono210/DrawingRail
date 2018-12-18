@@ -33,6 +33,10 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 	// シーンの名前
 	private string sceneName;
 
+	[HideInInspector] public GameObject viewF;
+	[HideInInspector] public GameObject train;
+	[HideInInspector] public GameObject tainctr;
+
 	// 初期化
 	protected override void Awake () {
 		Debug.Log ("init!");
@@ -142,5 +146,11 @@ public class Fanctions : SingletonMonoBehaviour<Fanctions> {
 
 	private void setStartAlfa () {
 		startFadeImage.color = new Color (redS, greenS, blueS, alfaS);
+	}
+
+	public void ResetObj () {
+		Destroy (viewF);
+		Destroy (train);
+		Destroy (tainctr);
 	}
 }

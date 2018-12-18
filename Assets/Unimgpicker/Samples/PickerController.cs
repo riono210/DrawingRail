@@ -13,11 +13,11 @@ namespace Kakera {
 
         //private Image imageRenderer;
 
-        [SerializeField] private Sprite defaultSprit;
+        [SerializeField] private Texture defaultTexture;
         void Awake () {
             // デフォルトで電車のスプライトを用意する
-            // imageRenderer.sprite = defaultSprit;
-            // RailCreateManager.Instance.SelectTrain = defaultSprit;
+            imageRenderer.material.mainTexture = defaultTexture;
+            RailCreateManager.Instance.SelectTrain = defaultTexture;
 
             imagePicker.Completed += (string path) => {
                 StartCoroutine (LoadImage (path, imageRenderer));

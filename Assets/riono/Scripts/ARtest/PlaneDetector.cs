@@ -64,6 +64,8 @@ public class PlaneDetector : MonoBehaviour {
         field.name = "ViewFiled";
         RailCreateManager.Instance.ARFiledExist = true;
 
+        Fanctions.Instance.viewF = field;
+
         // 生成した平面オブジェクトを管理用Listに登録
         ARPlaneAnchorGameObject arpag = new ARPlaneAnchorGameObject ();
         arpag.planeAnchor = arPlaneAnchor;

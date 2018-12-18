@@ -150,14 +150,14 @@ public class CreateRale : MonoBehaviour {
             raileInstance.name = "rail_" + railCount;
 
             //if (railCount % 2 == 0 && railCount < totalCount) {
-                // 実体インスタンス
-                GameObject entityRailInstanc = Instantiate (entityPrefab,
-                    newPosition,
-                    Quaternion.Euler (90, -xzAngle, 0),
-                    entityRailParet.transform);
+            // 実体インスタンス
+            GameObject entityRailInstanc = Instantiate (entityPrefab,
+                newPosition,
+                Quaternion.Euler (90, -xzAngle, 0),
+                entityRailParet.transform);
 
-                EntitySetSize (currentChild.position, nextChild.position, entityRailInstanc.transform);
-                entityRailInstanc.name = "entityRail_" + railCount;
+            EntitySetSize (currentChild.position, nextChild.position, entityRailInstanc.transform);
+            entityRailInstanc.name = "entityRail_" + railCount;
             //}
         }
 
@@ -207,22 +207,24 @@ public class CreateRale : MonoBehaviour {
         Vector3 railSize = rail.transform.localScale;
         //Debug.Log ("diff:" + diff + " rail:" + railSize.x);
 
-        // 二点間の距離がレールの元サイズよりも大きいとき
-        if (diff > railSize.x) {
-            // 調整値を計算
-            float xSize = (diff - railSize.x);
-            // NavMeshができるよう調整
-            xSize *= 1.2f;
-
-            rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
-
-        } else if (diff <= railSize.x) { // 二点間の距離がレールの元サイズよりも小さい時
+        if (diff * 4 <= railSize.x) { // 二点間の距離がレールの元サイズよりも小さい時
             // 調整値を計算
             float xSize = (railSize.x - diff);
             // NavMeshができるよう調整
-            xSize *= 0.7f;
+            xSize *= 0.75f;
 
             rail.transform.localScale = new Vector3 (railSize.x - xSize, railSize.y, railSize.z);
+        }
+        // 二点間の距離がレールの元サイズよりも大きいとき
+        else {
+            // 調整値を計算
+            float xSize = (railSize.x - diff);
+            // NavMeshができるよう調整
+            xSize *= 1.1f;
+            Debug.Log (xSize);
+
+            rail.transform.localScale = new Vector3 (railSize.x + xSize, railSize.y, railSize.z);
+
         }
     }
 
