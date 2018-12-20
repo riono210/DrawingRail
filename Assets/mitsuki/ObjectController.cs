@@ -19,19 +19,16 @@ public class ObjectController : MonoBehaviour {
 
     public void GoButton () {
         m_navAgent.speed += 0.05f;
-        bgmController.pitchUp(); //bgmを速くする
+        bgmController.pitchUp (); //bgmを速くする
     }
     public void StopButton () {
         m_navAgent.speed -= 0.05f;
-        bgmController.pitchDown(); //bgmを遅くする
+        bgmController.pitchDown (); //bgmを遅くする
     }
 
-    public void SetGo(bool isGo){
-
-    }
-
-    public void SetStop(bool isStop){
-        
+    // 速度セット
+    public void SetSpeed (float nspeed) {
+        m_navAgent.speed = nspeed;
     }
 
     private void Start () {
@@ -41,7 +38,7 @@ public class ObjectController : MonoBehaviour {
             m_navAgent.destination = m_target[currnetTartget].position;
         }
 
-        bgmController = GameObject.Find("BGM").GetComponent<BGMController>();//BGMの速度を変更するやつ
+        bgmController = GameObject.Find ("BGM").GetComponent<BGMController> (); //BGMの速度を変更するやつ
     }
 
     private void Update () {

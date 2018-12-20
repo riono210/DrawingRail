@@ -13,10 +13,16 @@ public class GetObjectController : MonoBehaviour {
 
     public GameObject SpeedUpButton; //UIのボタン
     public GameObject SpeedDownButton; //UIのボタン
+    public GameObject SpeedMeter; //メーター
+
+    public Text headText; // ヘッダーテキスト
 
     [HideInInspector] public bool CheckFrag = true; //CheckTrainを一度だけ実行させる
     void Start () {
-
+        SpeedUpButton.SetActive (false);
+        SpeedDownButton.SetActive (false);
+        SpeedMeter.SetActive (false);
+        headText.text = ("カメラをゆかにむけよう");
     }
 
     // Update is called once per frame
@@ -27,6 +33,11 @@ public class GetObjectController : MonoBehaviour {
 
     private void CheckTrain () {
         if (RailCreateManager.Instance.trainExistence && CheckFrag) {
+            SpeedUpButton.SetActive (true);
+            SpeedDownButton.SetActive (true);
+            SpeedMeter.SetActive (true);
+
+            headText.text = ("はしらせよう");
             //電車を取得する
             CreateTrain createtrain = this.gameObject.GetComponent<CreateTrain> ();
 
@@ -36,6 +47,9 @@ public class GetObjectController : MonoBehaviour {
             //電車についたObjectControllerを持ってくる
             objectcontroller = TrainObject.GetComponent<ObjectController> ();
 
+            // 初速度
+            objectcontroller.SetSpeed (0.05f);
+
             // イベントトリガー取得
             EventTrigger SpUpBtnTrig = SpeedUpButton.GetComponent<EventTrigger> ();
             EventTrigger SpDownBtnTrig = SpeedDownButton.GetComponent<EventTrigger> ();
@@ -44,6 +58,7 @@ public class GetObjectController : MonoBehaviour {
             SpUpBtnTrig.triggers = null;
             SpDownBtnTrig.triggers = null;
 
+            // イベントトリガーに登録
             EventTrigger.Entry entryGo = new EventTrigger.Entry ();
             entryGo.eventID = EventTriggerType.PointerDown;
             entryGo.callback.AddListener ((x) => objectcontroller.GoButton ());

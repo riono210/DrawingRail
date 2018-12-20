@@ -759,7 +759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000005398696, y: 0.0000031115396}
+  m_AnchoredPosition: {x: -0.000021203301, y: -0.000018743796}
   m_SizeDelta: {x: 0, y: 58.7}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &764589628
@@ -1468,6 +1468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeedUpButton: {fileID: 1449914726}
   SpeedDownButton: {fileID: 1673233390}
+  SpeedMeter: {fileID: 1655902015}
+  headText: {fileID: 1704459272}
   CheckFrag: 1
 --- !u!1 &1280936837
 GameObject:

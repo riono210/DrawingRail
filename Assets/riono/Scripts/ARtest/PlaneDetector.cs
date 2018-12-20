@@ -16,7 +16,7 @@ public class PlaneDetector : MonoBehaviour {
 
     private bool isPreparation;
     // 待機時表示イメージ
-    public Image waitImg;
+    public GameObject waitImg;
 
     void Start () {
         planeNum = 0;
@@ -28,8 +28,20 @@ public class PlaneDetector : MonoBehaviour {
     // 平面認識の待機
     private IEnumerator WaitPreparation () {
         // 点滅なりなんなり
+        waitImg.SetActive (false);
 
-        yield return new WaitForSeconds (5f);
+        yield return new WaitForSeconds (0.8f);
+        waitImg.SetActive (true);
+
+        yield return new WaitForSeconds (1.5f);
+        waitImg.SetActive (false);
+
+        yield return new WaitForSeconds (1f);
+        waitImg.SetActive (true);
+        yield return new WaitForSeconds (1.5f);
+        waitImg.SetActive (false);
+
+        yield return new WaitForSeconds (0.5f);
 
         planeAnchorMap = new Dictionary<string, ARPlaneAnchorGameObject> ();
         // 各イベントを受け取るメソッド設定

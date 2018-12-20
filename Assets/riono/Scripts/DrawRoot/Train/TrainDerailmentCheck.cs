@@ -32,7 +32,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		getTrain = false;
-		derailSpeed = 0.5f;
+		derailSpeed = 0.9f;
 		isDerail = false;
 
 		bgmController = GameObject.Find ("BGM").GetComponent<BGMController> ();
@@ -75,7 +75,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 
 			} else if (speed < derailSpeed) {
 				int speedRate = (int) ((speed / derailSpeed) * 10);
-				Debug.Log ("sp: " + speedRate);
+				//Debug.Log ("sp: " + speedRate);
 
 				for (int i = 0; i < 5; i++) {
 					Transform speedChiled = speedMeterContent.transform.GetChild (i);
