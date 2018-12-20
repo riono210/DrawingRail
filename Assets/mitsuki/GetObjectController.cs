@@ -40,6 +40,10 @@ public class GetObjectController : MonoBehaviour {
             EventTrigger SpUpBtnTrig = SpeedUpButton.GetComponent<EventTrigger> ();
             EventTrigger SpDownBtnTrig = SpeedDownButton.GetComponent<EventTrigger> ();
 
+            // イベントが重複しないように削除
+            SpUpBtnTrig.triggers = null;
+            SpDownBtnTrig.triggers = null;
+
             EventTrigger.Entry entryGo = new EventTrigger.Entry ();
             entryGo.eventID = EventTriggerType.PointerDown;
             entryGo.callback.AddListener ((x) => objectcontroller.GoButton ());

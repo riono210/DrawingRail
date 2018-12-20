@@ -27,6 +27,7 @@ public class TrainDerailmentCheck : MonoBehaviour {
 	public BGMController bgmController; // bgmのBPM調整
 
 	public GameObject speedMeterContent; // スピードメーター
+	public AudioClip explosionSE; // 爆発SE
 
 	// Use this for initialization
 	void Start () {
@@ -72,12 +73,6 @@ public class TrainDerailmentCheck : MonoBehaviour {
 				dangerImg.SetActive (true);
 				Derail ();
 
-				// } else if (speed >= derailSpeed * 0.6) { // 点滅
-				// 	if (flash == null) {
-				// 		flash = SpeedDanger ();
-				// 		StartCoroutine (flash);
-				// 	}
-
 			} else if (speed < derailSpeed) {
 				int speedRate = (int) ((speed / derailSpeed) * 10);
 				Debug.Log ("sp: " + speedRate);
@@ -93,20 +88,25 @@ public class TrainDerailmentCheck : MonoBehaviour {
 					}
 				}
 
-			} else {
-				if (flash != null) { // 点滅停止
-					StopCoroutine (flash);
-					flash = null;
-				}
+				if (speedRate >= 8) { // 点滅
+					if (flash == null) {
+						flash = SpeedDanger ();
+						StartCoroutine (flash);
+					}
+				} else {
+					if (flash != null) { // 点滅停止
+						StopCoroutine (flash);
+						flash = null;
+					}
 
-				if (!isDerail) { // 脱線していない時
-					// 点灯してコルーチンが終わった場合
-					dangerImg.SetActive (false);
+					if (!isDerail) { // 脱線していない時
+						// 点灯してコルーチンが終わった場合
+						dangerImg.SetActive (false);
+					}
 				}
 			}
 		}
 	}
-
 	// 危険マークを点滅させる
 	private IEnumerator SpeedDanger () {
 		//Debug.Log ("call");
@@ -124,6 +124,8 @@ public class TrainDerailmentCheck : MonoBehaviour {
 
 	// 脱線
 	private void Derail () {
+		train.GetComponent<AudioSource> ().PlayOneShot (explosionSE);
+
 		// 子供を外す
 		trainChiled = train.transform.GetChild (0).gameObject;
 		trainChiled.transform.parent = null;

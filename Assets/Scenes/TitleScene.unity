@@ -1259,6 +1259,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1693848024}
   startFadeImage: {fileID: 224339165}
+  viewF: {fileID: 0}
+  train: {fileID: 0}
+  tainctr: {fileID: 0}
 --- !u!1 &2012537521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,7 +1537,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 5e97d67397bb34fd4a68ac26c84c1562, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0

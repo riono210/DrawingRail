@@ -315,14 +315,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4169960661804694, guid: 1598ac136dd5f4a0aa23f0b78f2f3913, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4670433073905734, guid: 1598ac136dd5f4a0aa23f0b78f2f3913, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1598ac136dd5f4a0aa23f0b78f2f3913, type: 2}
   m_IsPrefabAsset: 0
@@ -528,7 +520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &474968448
 RectTransform:
   m_ObjectHideFlags: 0
@@ -767,7 +759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000005398696, y: 0.000034455752}
+  m_AnchoredPosition: {x: 0.000005398696, y: 0.0000031115396}
   m_SizeDelta: {x: 0, y: 58.7}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &764589628
@@ -1462,6 +1454,7 @@ MonoBehaviour:
     type: 2}
   bgmController: {fileID: 0}
   speedMeterContent: {fileID: 749072077}
+  explosionSE: {fileID: 8300000, guid: d15d46d3f2da8407e9b802ba1f9ab433, type: 3}
 --- !u!114 &1223651448
 MonoBehaviour:
   m_ObjectHideFlags: 0
