@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,6 +29,9 @@ public class FreeHand : MonoBehaviour {
     private AudioSource audioSourceOfResetButton; //ResetBtn用の音
     private AudioSource audioSourceOfCreateButton; //CreateBtn用の音
 
+    public GameObject RailExample; // レールの例
+    private bool isExampleFin; // レールの例が終わったか
+
     void Start () {
 
         if (CameraObj == null) {
@@ -38,35 +42,57 @@ public class FreeHand : MonoBehaviour {
         resetFlg = false;
         clickFlg = false;
 
+        //isExampleFin = false;
+
         xRange = fieldRange.GetRange ("x");
         zRange = fieldRange.GetRange ("z");
 
         AudioSource[] audioSources = GetComponents<AudioSource> ();
         audioSourceOfResetButton = audioSources[1];
         audioSourceOfCreateButton = audioSources[0];
+
+        StartCoroutine (ExampleDraw ());
     }
 
     void Update () {
-
+        if (isExampleFin) {
 #if UNITY_EDITOR_OSX 
-        // ボタンが押された時に線オブジェクトの追加を行う
-        if (Input.GetMouseButtonDown (0) && !resetFlg) {
-            this.AddLineObject ();
-        }
+            // ボタンが押された時に線オブジェクトの追加を行う
+            if (Input.GetMouseButtonDown (0) && !resetFlg) {
+                this.AddLineObject ();
+            }
 
-        // ボタンが押されている時、LineRendererに位置データの設定を指定していく
-        if (Input.GetMouseButton (0) && !resetFlg) {
-            this.AddPositionDataToLineRendererList ();
-        }
+            // ボタンが押されている時、LineRendererに位置データの設定を指定していく
+            if (Input.GetMouseButton (0) && !resetFlg) {
+                this.AddPositionDataToLineRendererList ();
+            }
 
-        if (Input.GetMouseButtonUp (0) && !resetFlg && !clickFlg) {
-            // LineFin();
-            resetFlg = true;
-        }
+            if (Input.GetMouseButtonUp (0) && !resetFlg && !clickFlg) {
+                // LineFin();
+                resetFlg = true;
+            }
 #elif UNITY_IOS
 
-        AddPositonWithIOS ();
+            AddPositonWithIOS ();
+
 #endif
+        }
+    }
+
+    // レールの例示
+    private IEnumerator ExampleDraw () {
+        Transform exRailChild = RailExample.transform.Find ("ExRail").GetComponentInChildren<Transform> ();
+
+        foreach (Transform Value in exRailChild) {
+            GameObject chiled = Value.gameObject;
+            chiled.SetActive (true);
+            yield return new WaitForSeconds (0.16f);
+        }
+
+        isExampleFin = true;
+        yield return new WaitForSeconds (0.5f);
+        RailExample.SetActive (false);
+        yield return null;
     }
 
     /// <summary>
