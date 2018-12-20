@@ -2435,8 +2435,8 @@ Camera:
   m_GameObject: {fileID: 1254597203}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -2993,7 +2993,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4758050585994918, guid: 65bc0c4c7e87044709649bf575d93b35, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.0063
+      value: -0.064
       objectReference: {fileID: 0}
     - target: {fileID: 4758050585994918, guid: 65bc0c4c7e87044709649bf575d93b35, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3001,7 +3001,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4758050585994918, guid: 65bc0c4c7e87044709649bf575d93b35, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -9.9924
+      value: -10.161
       objectReference: {fileID: 0}
     - target: {fileID: 4758050585994918, guid: 65bc0c4c7e87044709649bf575d93b35, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3043,6 +3043,14 @@ Prefab:
       propertyPath: RailExample
       value: 
       objectReference: {fileID: 906161377}
+    - target: {fileID: 4758050585994918, guid: 65bc0c4c7e87044709649bf575d93b35, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.9571016
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758050585994918, guid: 65bc0c4c7e87044709649bf575d93b35, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 3.5201957
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65bc0c4c7e87044709649bf575d93b35, type: 2}
   m_IsPrefabAsset: 0
