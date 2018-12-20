@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.iOS;
 
 public class PlaneDetector : MonoBehaviour {
@@ -13,8 +14,22 @@ public class PlaneDetector : MonoBehaviour {
     // 生成されたplaneの数
     private int planeNum;
 
+    private bool isPreparation;
+    // 待機時表示イメージ
+    public Image waitImg;
+
     void Start () {
         planeNum = 0;
+        isPreparation = false;
+
+        StartCoroutine (WaitPreparation ());
+    }
+
+    // 平面認識の待機
+    private IEnumerator WaitPreparation () {
+        // 点滅なりなんなり
+
+        yield return new WaitForSeconds (5f);
 
         planeAnchorMap = new Dictionary<string, ARPlaneAnchorGameObject> ();
         // 各イベントを受け取るメソッド設定

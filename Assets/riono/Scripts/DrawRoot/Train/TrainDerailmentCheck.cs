@@ -26,6 +26,8 @@ public class TrainDerailmentCheck : MonoBehaviour {
 
 	public BGMController bgmController; // bgmのBPM調整
 
+	public GameObject speedMeterContent; // スピードメーター
+
 	// Use this for initialization
 	void Start () {
 		getTrain = false;
@@ -70,11 +72,27 @@ public class TrainDerailmentCheck : MonoBehaviour {
 				dangerImg.SetActive (true);
 				Derail ();
 
-			} else if (speed >= derailSpeed * 0.6) { // 点滅
-				if (flash == null) {
-					flash = SpeedDanger ();
-					StartCoroutine (flash);
+				// } else if (speed >= derailSpeed * 0.6) { // 点滅
+				// 	if (flash == null) {
+				// 		flash = SpeedDanger ();
+				// 		StartCoroutine (flash);
+				// 	}
+
+			} else if (speed < derailSpeed) {
+				int speedRate = (int) ((speed / derailSpeed) * 10);
+				Debug.Log ("sp: " + speedRate);
+
+				for (int i = 0; i < 5; i++) {
+					Transform speedChiled = speedMeterContent.transform.GetChild (i);
+					if (speedRate == 0) {
+						speedChiled.gameObject.SetActive (false);
+					} else if (i <= speedRate / 2) {
+						speedChiled.gameObject.SetActive (true);
+					} else {
+						speedChiled.gameObject.SetActive (false);
+					}
 				}
+
 			} else {
 				if (flash != null) { // 点滅停止
 					StopCoroutine (flash);

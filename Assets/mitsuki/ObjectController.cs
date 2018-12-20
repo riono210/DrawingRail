@@ -17,13 +17,21 @@ public class ObjectController : MonoBehaviour {
         GetNavMeshAgent ();
     }
 
-    public void GoButtonDown () {
+    public void GoButton () {
         m_navAgent.speed += 0.05f;
         bgmController.pitchUp(); //bgmを速くする
     }
-    public void StopButtonDown () {
+    public void StopButton () {
         m_navAgent.speed -= 0.05f;
         bgmController.pitchDown(); //bgmを遅くする
+    }
+
+    public void SetGo(bool isGo){
+
+    }
+
+    public void SetStop(bool isStop){
+        
     }
 
     private void Start () {
