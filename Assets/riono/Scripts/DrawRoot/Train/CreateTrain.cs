@@ -10,7 +10,9 @@ public class CreateTrain : MonoBehaviour {
 	public GameObject viewFiled; // レールオブジェクトの親
 	private GameObject railObj; // レールオブジェクト
 
-	private int railNum; // レールの数   
+	private int railNum; // レールの数
+
+	public GameObject HindranceCanvas; // 津梁祭り用の終了キャンバス
 
 	[HideInInspector] public bool trainDeparture;
 
@@ -41,6 +43,8 @@ public class CreateTrain : MonoBehaviour {
 		// }
 		if (trainDeparture) {
 			StartCoroutine (StartDeparture ());
+			// 津梁祭りようタイマー
+			StartCoroutine (Timer ());
 			trainDeparture = false;
 		}
 
@@ -62,6 +66,8 @@ public class CreateTrain : MonoBehaviour {
 			// }
 			if (trainDeparture) {
 				StartCoroutine (StartDeparture ());
+				// 津梁祭りようタイマー
+				StartCoroutine (Timer ());
 				trainDeparture = false;
 			}
 
@@ -106,7 +112,6 @@ public class CreateTrain : MonoBehaviour {
 
 			RailCreateManager.Instance.rootExistence = false;
 
-			
 			Fanctions.Instance.train = trainInst;
 			Fanctions.Instance.tainctr = this.gameObject;
 		}
@@ -154,12 +159,20 @@ public class CreateTrain : MonoBehaviour {
 
 			// 電車が生成されたと通知
 			RailCreateManager.Instance.trainExistence = true;
+
 			Debug.Log ("sucsess");
 		} else {
 			yield return new WaitForSeconds (0.2f);
 			Debug.Log ("wait");
 			trainDeparture = true;
 		}
+	}
+
+	// it津梁祭り用のタイマー
+	private IEnumerator Timer () {
+		yield return new WaitForSeconds (180f);
+
+		HindranceCanvas.SetActive (true);
 	}
 
 	private IEnumerator DestroyCmp (Component cmp) {

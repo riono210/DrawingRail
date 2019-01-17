@@ -13,17 +13,28 @@ public class ObjectController : MonoBehaviour {
 
     private BGMController bgmController;
 
+    private bool isSpeedUp;
+    private bool isSpeedDown;
+
     private void Awake () {
         GetNavMeshAgent ();
     }
 
     public void GoButton () {
-        m_navAgent.speed += 0.05f;
+        m_navAgent.speed += 0.008f;
         bgmController.pitchUp (); //bgmを速くする
     }
     public void StopButton () {
-        m_navAgent.speed -= 0.05f;
+        m_navAgent.speed -= 0.008f;
         bgmController.pitchDown (); //bgmを遅くする
+    }
+
+    public void SpeedUp (bool isUp) {
+        isSpeedUp = isUp;
+    }
+
+    public void SpeeDown (bool isDown) {
+        isSpeedDown = isDown;
     }
 
     // 速度セット
@@ -42,11 +53,19 @@ public class ObjectController : MonoBehaviour {
     }
 
     private void Update () {
-        // if (RailCreateManager.Instance.isDerail && m_navAgent == null) {
-        //     GetNavMeshAgent ();
-        // } else {
-        //     RailCreateManager.Instance.isDerail = false;
-        // }
+        if (isSpeedUp) {
+            //isSpeedDown = false;
+            GoButton ();
+            Debug.Log ("ta");
+        }
+        if (isSpeedDown) {
+            //isSpeedUp = false;
+            StopButton ();
+            Debug.Log ("su");
+        }
+
+        Debug.Log ("up" + isSpeedUp);
+        Debug.Log ("down " + isSpeedDown);
 
         Vector3 pos = m_target[currnetTartget].position;
         //Debug.Log("dist; " + Vector3.Distance(this.transform.position, pos));

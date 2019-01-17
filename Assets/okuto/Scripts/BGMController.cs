@@ -27,7 +27,7 @@ public class BGMController : MonoBehaviour {
 
 	private float speed = 1.0f;
 	private float pitch = 1.0f;
-	private float bgmInterval = 1.08f;
+	private float bgmInterval = 1.015f;
 
 	// Use this for initialization
 	void Start () {

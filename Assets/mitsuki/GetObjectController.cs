@@ -61,13 +61,25 @@ public class GetObjectController : MonoBehaviour {
             // イベントトリガーに登録
             EventTrigger.Entry entryGo = new EventTrigger.Entry ();
             entryGo.eventID = EventTriggerType.PointerDown;
-            entryGo.callback.AddListener ((x) => objectcontroller.GoButton ());
+            entryGo.callback.AddListener ((x) => objectcontroller.SpeedUp (true));
             SpUpBtnTrig.triggers.Add (entryGo);
+
+            EventTrigger.Entry entryGoF = new EventTrigger.Entry ();
+            entryGoF.eventID = EventTriggerType.PointerUp;
+            entryGoF.callback.AddListener ((x) => objectcontroller.SpeedUp (false));
+            SpUpBtnTrig.triggers.Add (entryGoF);
+
+
 
             EventTrigger.Entry entryStop = new EventTrigger.Entry ();
             entryStop.eventID = EventTriggerType.PointerDown;
-            entryStop.callback.AddListener ((x) => objectcontroller.StopButton ());
+            entryStop.callback.AddListener ((x) => objectcontroller.SpeeDown(true));
             SpDownBtnTrig.triggers.Add (entryStop);
+
+            EventTrigger.Entry entryStopF = new EventTrigger.Entry ();
+            entryStopF.eventID = EventTriggerType.PointerUp;
+            entryStopF.callback.AddListener ((x) => objectcontroller.SpeeDown(false));
+            SpDownBtnTrig.triggers.Add (entryStopF);
 
             // イベントが重複しないように削除
             // SpeedUpButton.onClick.RemoveAllListeners ();
